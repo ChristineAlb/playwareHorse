@@ -14,6 +14,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.livelife.motolibrary.AntData;
+import com.livelife.motolibrary.Game;
 import com.livelife.motolibrary.MotoConnection;
 import com.livelife.motolibrary.MotoConnection;
 import com.livelife.motolibrary.MotoGame;
@@ -35,6 +36,10 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
     Boolean pairing = false;
     Boolean updating = false;
 
+    Horse game = new Horse();
+    Button startGameButton;
+    boolean playing = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,11 +52,6 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
         connection = MotoConnection.getInstance();
 
         connectButton = (Button) findViewById(R.id.connectButton);
-
-        Horse game = new Horse();
-        Button gameButton;
-
-
         connectButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -139,6 +139,24 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
         });
 
         tilesConnectedLabel = (TextView) findViewById(R.id.tilesConnectedLabel);
+
+        // Game stuff goes here
+        startGameButton = (Button) findViewById(R.id.playGame);
+        startGameButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!playing) {
+                    game.startGame();
+                    startGameButton.setText("STOP GAME");
+                } else {
+                    game.stopGame();
+                    startGameButton.setText("START GAME");
+                }
+                playing = !playing;
+            }
+        });
+
+        // Game stuff ends here
     }
 
     public void enableActions(boolean enabled) {
@@ -197,6 +215,7 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
                 Log.v(tag,"cmd: "+command+" tile: "+tileId);
                 break;
         }
+        game.addEvent(bytes);
     }
 
     @Override
