@@ -2,11 +2,14 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Horse.iml" filepath="$PROJECT_DIR$/Horse.iml" />
+      <module fileurl="file://C:\Users\marti\AndroidStudioProjects\playwareHorse\Horse.iml" filepath="C:\Users\marti\AndroidStudioProjects\playwareHorse\Horse.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/motolibrary-debug-0.2/motolibrary-debug-0.2.iml" filepath="$PROJECT_DIR$/motolibrary-debug-0.2/motolibrary-debug-0.2.iml" />
+      <module fileurl="file://C:\Users\marti\AndroidStudioProjects\playwareHorse\app\app.iml" filepath="C:\Users\marti\AndroidStudioProjects\playwareHorse\app\app.iml" />
+      <module fileurl="file://C:\Users\marti\AndroidStudioProjects\playwareHorse\motolibrary-debug-0.2\motolibrary-debug-0.2.iml" filepath="C:\Users\marti\AndroidStudioProjects\playwareHorse\motolibrary-debug-0.2\motolibrary-debug-0.2.iml" />
       <module fileurl="file://$PROJECT_DIR$/motolibrary-release-0.5/motolibrary-release-0.5.iml" filepath="$PROJECT_DIR$/motolibrary-release-0.5/motolibrary-release-0.5.iml" />
+      <module fileurl="file://C:\Users\marti\AndroidStudioProjects\playwareHorse\motolibrary-release-0.5\motolibrary-release-0.5.iml" filepath="C:\Users\marti\AndroidStudioProjects\playwareHorse\motolibrary-release-0.5\motolibrary-release-0.5.iml" />
       <module fileurl="file://$PROJECT_DIR$/playwareHorse.iml" filepath="$PROJECT_DIR$/playwareHorse.iml" />
+      <module fileurl="file://C:\Users\marti\AndroidStudioProjects\playwareHorse\playwareHorse.iml" filepath="C:\Users\marti\AndroidStudioProjects\playwareHorse\playwareHorse.iml" />
     </modules>
   </component>
 </project>
