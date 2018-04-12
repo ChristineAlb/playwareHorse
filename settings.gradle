@@ -1,1 +1,1 @@
-include ':app', ':motolibrary-debug-0.2'
+include ':app', ':motolibrary-release-0.5'
