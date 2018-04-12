@@ -1,10 +1,8 @@
 package com.example.christine.horse;
 
-/**
- * Created by Martin on 4/12/2018.
- */
+import com.livelife.motolibrary.Game;
 
-public class Horse {
+public class Horse extends Game {
 
     // This is the horse game class
 
