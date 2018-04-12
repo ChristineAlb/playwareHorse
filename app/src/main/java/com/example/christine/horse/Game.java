@@ -3,7 +3,7 @@
 // (powered by Fernflower decompiler)
 //
 
-package com.example.christine.horse;
+package com.livelife.motolibrary;
 
 import android.os.Handler;
 
@@ -17,9 +17,7 @@ public class Game {
     private String description;
     private int duration = 0;
     private int remaining = 0;
-    //CHRIS: Added extra score variable
-    private int score1 = 0;
-    private int score2 = 0;
+    private int score = 0;
     private Handler timerHandler = new Handler();
     private Runnable timerRunnable = new Runnable() {
         public void run() {
@@ -68,26 +66,13 @@ public class Game {
         this.remaining = duration;
     }
 
-    //CHRIS: Added extra incrementScore method
-    public void incrementScore1(int scoreToAdd) {
-        this.score1 += scoreToAdd;
+    public void incrementScore(int scoreToAdd) {
+        this.score += scoreToAdd;
         if(this.onGameEventListener != null) {
-            this.onGameEventListener.onGameScoreEvent(this.score1, 1);
+            this.onGameEventListener.onGameScoreEvent(this.score);
         }
-    }
-    public void incrementScore2(int scoreToAdd) {
-        this.score2 += scoreToAdd;
-        if(this.onGameEventListener != null) {
-            this.onGameEventListener.onGameScoreEvent(this.score2, 2);
-        }
-    }
 
-    //CHRIS: Added two methods to access score values from other classes
-    public int getRedScore() {
-        return this.score1;
     }
-    public int getBlueScore() { return this.score2; }
-
 
     public void addEvent(byte[] message) {
         switch(this.currentState) {
@@ -123,8 +108,7 @@ public class Game {
             this.isPlaying = true;
             this.currentState = 2;
             this.remaining = this.duration;
-            this.score1 = 0;
-            this.score2 = 0;
+            this.score = 0;
             this.onGameStart();
             if(this.duration != 0) {
                 this.timerHandler.postDelayed(this.timerRunnable, 1000L);
@@ -163,7 +147,7 @@ public class Game {
 
     public interface OnGameEventListener {
         void onGameTimerEvent(int var1);
-        //CHRIS: Added extra variable to function that updates UI
-        void onGameScoreEvent(int var1, int i);
+
+        void onGameScoreEvent(int var1);
     }
 }
