@@ -76,11 +76,25 @@
             android:layout_height="60dp"
             android:text="START UPDATE FIRMWARE"/>
 
-        <!--<Button-->
-        <!--android:id="@+id/setColorButton"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="60dp"-->
-        <!--android:text="SET RANDOM COLOR"/>-->
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/actionsLayout">
+        <Button
+            android:id="@+id/playGame"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="START GAME"/>
 
     </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>

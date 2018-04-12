@@ -47,6 +47,11 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
         connection = MotoConnection.getInstance();
 
         connectButton = (Button) findViewById(R.id.connectButton);
+
+        Horse game = new Horse();
+        Button gameButton;
+
+
         connectButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
