@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
     Boolean isConnected = false;
     Boolean pairing = false;
     Boolean updating = false;
-
+ 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
