@@ -1,3 +1,36 @@
 <resources>
     <string name="app_name">Horse</string>
+
+    <string-array name="channels">
+        <item>No Channel</item>
+        <item>Channel 1</item>
+        <item>Channel 2</item>
+        <item>Channel 3</item>
+        <item>Channel 4</item>
+        <item>Channel 5</item>
+        <item>Channel 6</item>
+        <item>Channel 7</item>
+        <item>Channel 8</item>
+        <item>Channel 9</item>
+    </string-array>
+
+    <string-array name="colors">
+        <item>Color OFF</item>
+        <item>RED</item>
+        <item>BLUE</item>
+        <item>GREEN</item>
+        <item>INDIGO</item>
+        <item>ORANGE</item>
+        <item>WHITE</item>
+    </string-array>
+
+    <string-array name="tiles">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+    </string-array>
+
 </resources>
