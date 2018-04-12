@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
 
     private static String tag = MainActivity.class.getSimpleName();
     MotoConnection connection;
-    
+
     Spinner spinner;
     Button connectButton,pairingButton,updFirmwareButton;
     LinearLayout actionsLayout;
