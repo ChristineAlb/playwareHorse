@@ -32,6 +32,7 @@ public class Horse extends Game{
         round = 1;
         step = 1;
         currentPlayer = 1;
+        connection.setAllTilesColor(currentPlayer);
     }
 
     @Override
