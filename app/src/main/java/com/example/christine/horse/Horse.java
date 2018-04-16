@@ -42,7 +42,7 @@ public class Horse extends Game{
         int tile = AntData.getId(message);
 
         if (cmd == AntData.EVENT_PRESS && step < round+base) {
-
+            if (step==1)connection.setAllTilesColor(0);
             if (round == 1) {
                 sequence.add(tile);
                 connection.setTileColor(currentPlayer,tile);
@@ -67,9 +67,12 @@ public class Horse extends Game{
     @Override
     public void onGameEnd() {
         super.onGameEnd();
+        connection.setAllTilesToInit();
+        handler.removeCallbacksAndMessages(null);
     }
 
     public void nextRound() {
+        handler.removeCallbacksAndMessages(null);
         step = 1;
         round++;
         if (currentPlayer == numPlayers) currentPlayer = 1;
