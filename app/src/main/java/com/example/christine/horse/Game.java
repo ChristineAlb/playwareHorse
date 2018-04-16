@@ -83,6 +83,10 @@ public class Game {
         this.numPlayers = numPlayers;
     }
 
+    public int getNumPlayers() {
+        return this.numPlayers;
+    }
+
     public void updateStatus(int addedMoves) {
         this.round ++;
         this.player ++;
