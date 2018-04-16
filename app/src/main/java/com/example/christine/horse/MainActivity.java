@@ -146,6 +146,7 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
             @Override
             public void onClick(View view) {
                 if(!playing) {
+                    game.setNumPlayers(numPlayersSpinner.getSelectedItemPosition());
                     game.startGame();
                     startGameButton.setText("STOP GAME");
                     numPlayersSpinner.setEnabled(false);
