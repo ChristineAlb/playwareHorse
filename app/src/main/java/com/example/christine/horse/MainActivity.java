@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
     private static String tag = MainActivity.class.getSimpleName();
     MotoConnection connection;
 
-    Spinner spinner;
+    Spinner spinner,numPlayersSpinner;
     Button connectButton,pairingButton,updFirmwareButton;
     LinearLayout actionsLayout;
     TextView tilesConnectedLabel;
@@ -148,15 +148,36 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
                 if(!playing) {
                     game.startGame();
                     startGameButton.setText("STOP GAME");
+                    numPlayersSpinner.setEnabled(false);
                 } else {
                     game.stopGame();
                     startGameButton.setText("START GAME");
+                    numPlayersSpinner.setEnabled(true);
                 }
                 playing = !playing;
             }
         });
 
-        // Game stuff ends here
+        numPlayersSpinner = (Spinner) findViewById(R.id.numPlayersSpinner);
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, R.layout.spinner_item, getResources().getStringArray(R.array.players));
+        numPlayersSpinner.setAdapter(adapter2);
+        numPlayersSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (i!=0) {
+                    startGameButton.setEnabled(true);
+                } else {
+                    startGameButton.setEnabled(false);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        //
     }
 
     public void enableActions(boolean enabled) {
