@@ -1,11 +1,9 @@
 package com.example.christine.horse;
 
 import android.os.Handler;
-
 import com.livelife.motolibrary.AntData;
 import com.livelife.motolibrary.Game;
 import com.livelife.motolibrary.MotoConnection;
-
 import java.util.ArrayList;
 
 public class Horse extends Game{
@@ -27,6 +25,7 @@ public class Horse extends Game{
         round = 1;
         step = 1;
         currentPlayer = 1;
+        connection.setAllTilesColor(currentPlayer);
     }
 
     @Override
@@ -36,11 +35,11 @@ public class Horse extends Game{
         int tile = AntData.getId(message);
 
         if (cmd == AntData.EVENT_PRESS && step < round+base) {
-
+            if (step==1)connection.setAllTilesColor(0);
             if (round == 1) {
                 sequence.add(tile);
                 connection.setTileColor(currentPlayer,tile);
-                handler.postDelayed(createRunnable(tile),1000);
+                handler.postDelayed(createRunnable(tile),700);
                 step++;
                 if (step >= round+base) {
                     nextRound();
@@ -51,7 +50,7 @@ public class Horse extends Game{
                     nextRound();
                 }else if (tile == sequence.get(step)) {
                     connection.setTileColor(currentPlayer,tile);
-                    handler.postDelayed(createRunnable(tile),1000);
+                    handler.postDelayed(createRunnable(tile),700);
                     step++;
                 }
             }
@@ -61,13 +60,16 @@ public class Horse extends Game{
     @Override
     public void onGameEnd() {
         super.onGameEnd();
+        connection.setAllTilesToInit();
+        handler.removeCallbacksAndMessages(null);
     }
 
     public void nextRound() {
+        handler.removeCallbacksAndMessages(null);
         step = 1;
         round++;
-        if (currentPlayer == numPlayers) currentPlayer = 1;
-        else currentPlayer++;
+        currentPlayer++;
+        if (currentPlayer>numPlayers) currentPlayer=1;
         connection.setAllTilesColor(currentPlayer);
     }
 
