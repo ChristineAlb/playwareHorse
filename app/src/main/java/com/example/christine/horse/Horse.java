@@ -8,9 +8,6 @@ import com.livelife.motolibrary.MotoConnection;
 
 import java.util.ArrayList;
 
-
-import java.util.ArrayList;
-
 public class Horse extends Game{
     MotoConnection connection = MotoConnection.getInstance();
 
