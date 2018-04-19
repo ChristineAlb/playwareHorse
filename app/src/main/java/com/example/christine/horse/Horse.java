@@ -1,17 +1,11 @@
 package com.example.christine.horse;
 
 import android.os.Handler;
-
 import com.livelife.motolibrary.AntData;
 import com.livelife.motolibrary.Game;
 import com.livelife.motolibrary.MotoConnection;
-
 import java.util.ArrayList;
 
-
-/**
- * Created by Martin on 4/12/2018.
- */
 
 public class Horse extends Game{
     MotoConnection connection = MotoConnection.getInstance();
@@ -46,7 +40,7 @@ public class Horse extends Game{
             if (round == 1) {
                 sequence.add(tile);
                 connection.setTileColor(currentPlayer,tile);
-                handler.postDelayed(createRunnable(tile),1000);
+                handler.postDelayed(createRunnable(tile),700);
                 step++;
                 if (step >= round+base) {
                     nextRound();
@@ -57,7 +51,7 @@ public class Horse extends Game{
                     nextRound();
                 }else if (tile == sequence.get(step)) {
                     connection.setTileColor(currentPlayer,tile);
-                    handler.postDelayed(createRunnable(tile),1000);
+                    handler.postDelayed(createRunnable(tile),700);
                     step++;
                 }
             }
@@ -75,8 +69,8 @@ public class Horse extends Game{
         handler.removeCallbacksAndMessages(null);
         step = 1;
         round++;
-        if (currentPlayer == numPlayers) currentPlayer = 1;
-        else currentPlayer++;
+        currentPlayer++;
+        if (currentPlayer>numPlayers) currentPlayer=1;
         connection.setAllTilesColor(currentPlayer);
     }
 
