@@ -19,7 +19,8 @@ public class Horse extends Game{
     int step;
     //final int base = 4;
 
-
+    // Hello there!
+    
     @Override
     public void onGameStart() {
         sequence.clear();
