@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Horse.iml" filepath="$PROJECT_DIR$/Horse.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/motolibrary-release-0.5/motolibrary-release-0.5.iml" filepath="$PROJECT_DIR$/motolibrary-release-0.5/motolibrary-release-0.5.iml" />
     </modules>
