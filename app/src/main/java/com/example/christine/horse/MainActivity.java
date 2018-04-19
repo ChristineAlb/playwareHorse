@@ -14,7 +14,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.livelife.motolibrary.AntData;
-import com.livelife.motolibrary.Game;
 import com.livelife.motolibrary.MotoConnection;
 import com.livelife.motolibrary.MotoConnection;
 import com.livelife.motolibrary.MotoGame;

@@ -17,7 +17,6 @@ public class Horse extends Game {
     ArrayList<Integer> sequence = new ArrayList<>();
     ArrayList<Integer> players = new ArrayList<>();
     int numPlayers;
-    int currentPlayer;
     int round;
     int step;
     //final int base = 4;
@@ -26,13 +25,14 @@ public class Horse extends Game {
     
     @Override
     public void onGameStart() {
-        sequence.clear();
         super.onGameStart();
         numPlayers = this.getNumPlayers();
+        for (int i=1; i<=numPlayers; i++) {
+            players.add(i);
+        }
         round = 1;
         step = 1;
-        currentPlayer = 1;
-        connection.setAllTilesColor(currentPlayer);
+        connection.setAllTilesColor(players.get(0));
         Log.v("","Game started: Number of Players:" + numPlayers);
     }
 
@@ -47,15 +47,18 @@ public class Horse extends Game {
 
             if (step < round) { // Compare to sequence
                 if (tile == sequence.get(step-1)){
-                    connection.setTileColor(currentPlayer,tile);
+                    connection.setTileColor(players.get(0),tile);
                     handler.postDelayed(createRunnable(tile),700);
                     step++;
+                } else {
+                    players.remove(0);
+                    nextRound();
                 }
                 //IF WRONG LOSE POINTS OR DIE, NOW IT ONLY WORKS IF RIGHT
             } else if (step == round){ // Add to sequence
                 sequence.add(tile);
                 step++;
-                connection.setTileColor(currentPlayer,tile);
+                connection.setTileColor(players.get(0),tile);
                 handler.postDelayed(createRunnable(tile),700);
                 handler.postDelayed(new Runnable() {
                     @Override
@@ -79,9 +82,9 @@ public class Horse extends Game {
         handler.removeCallbacksAndMessages(null);
         step = 1;
         round++;
-        currentPlayer++;
-        if (currentPlayer>numPlayers) currentPlayer=1;
-        connection.setAllTilesColor(currentPlayer);
+        int t = players.remove(0);
+        players.add(t);
+        connection.setAllTilesColor(players.get(0));
     }
 
     Handler handler = new Handler();
