@@ -22,7 +22,7 @@ public class Horse extends Game {
     //final int base = 4;
 
     // Hello there!
-    
+
     @Override
     public void onGameStart() {
         sequence.clear();
