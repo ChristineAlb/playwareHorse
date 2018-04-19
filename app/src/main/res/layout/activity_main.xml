@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.christine.horse.MainActivity">
+    tools:context="com.example.christine.horse.MainActivity">-->
 
-    <!--hej christine-->
-
-    <!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -25,58 +23,52 @@
         android:layout_height="fill_parent"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/TopSpinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp">-->
-
-    <TextView
-        android:id="@+id/tilesConnectedLabel"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:gravity="center_vertical"
-        android:text="Waiting for ANT..."
-        app:layout_constraintTop_toTopOf="@id/spinner"
-        app:layout_constraintStart_toEndOf="@id/spinner"
-        />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:gravity="center_vertical"
-        android:text="Select channel"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <Spinner
-        android:id="@+id/spinner"
-        tools:listitem="@layout/spinner_item"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="16dp"
-        android:entries="@array/channels"
-        app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <Button
-        android:id="@+id/connectButton"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
+    <LinearLayout
+        android:id="@+id/TopSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="Connect"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"/>
+        android:layout_marginStart="16dp">
 
-        <!--</LinearLayout>-->
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="16dp"
+            android:gravity="center_vertical"
+            android:text="Select channel" />
+            <!--android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="Select channel"/>-->
+            <!--android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"-->
+            <!--app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>-->
+
+        <Spinner
+            android:id="@+id/spinner"
+            tools:listitem="@layout/spinner_item"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:entries="@array/channels"/>
+            <!--  app:layout_constraintStart_toEndOf="@+id/textView"
+            app:layout_constraintTop_toTopOf="parent"/>-->
+
+        <TextView
+            android:id="@+id/tilesConnectedLabel"
+            android:text="Waiting for ANT..."
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="16dp"/>
+            <!--app:layout_constraintTop_toTopOf="@id/spinner"
+            app:layout_constraintStart_toEndOf="@id/spinner"-->
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/actionsLayout"
@@ -89,7 +81,19 @@
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/connectButton">
+        app:layout_constraintTop_toBottomOf="@+id/TopSpinner">
+
+        <Button
+            android:id="@+id/connectButton"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Connect"/>
+            <!--android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"-->
+           <!-- app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView"-->
 
         <Button
             android:id="@+id/pairingButton"
@@ -104,6 +108,7 @@
             android:text="START UPDATE FIRMWARE"/>
 
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/gameLayout"
         android:layout_width="match_parent"
@@ -115,6 +120,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/actionsLayout">
+
         <LinearLayout
             android:id="@+id/gameSettingsLayout"
             android:layout_height="wrap_content"
@@ -132,7 +138,9 @@
                 android:layout_width="wrap_content"
                 tools:listitem="@layout/spinner_item"
                 android:entries="@array/players"/>
+
         </LinearLayout>
+
         <Button
             android:id="@+id/playGame"
             android:layout_width="match_parent"
@@ -140,12 +148,86 @@
             android:layout_weight="1"
             android:text="START GAME" />
     </LinearLayout>
-<!--
+
+        <LinearLayout
+            android:id="@+id/ScoreBoard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#999"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/GameLayout">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="1dp"
+                android:layout_weight="1"
+                android:background="#fff4f4f4"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="Team Red"
+                    android:textAllCaps="true"
+                    android:textColor="#000"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/team_a_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:fontFamily="sans-serif-light"
+                    android:text="0"
+                    android:textAllCaps="true"
+                    android:textColor="#000"
+                    android:textSize="56sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="1dp"
+                android:layout_weight="1"
+                android:background="#fff4f4f4"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="Team Blue"
+                    android:textAllCaps="true"
+                    android:textColor="#000"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/team_b_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:fontFamily="sans-serif-light"
+                    android:text="0"
+                    android:textAllCaps="true"
+                    android:textColor="#000"
+                    android:textSize="56sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
     </LinearLayout>
 
     </ScrollView>
 
-    </RelativeLayout>-->
+    </RelativeLayout>
 
 
-</android.support.constraint.ConstraintLayout>
+<!--</android.support.constraint.ConstraintLayout>-->
