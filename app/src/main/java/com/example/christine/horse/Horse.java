@@ -4,36 +4,33 @@ import android.os.Handler;
 import android.util.Log;
 
 import com.livelife.motolibrary.AntData;
+import com.livelife.motolibrary.Game;
 import com.livelife.motolibrary.MotoConnection;
 import java.util.ArrayList;
-import java.lang.Object;
-import java.lang.Thread;
 
 /*sdsd*/
 
-public class Horse extends com.example.christine.horse.Game {
+public class Horse extends Game {
     MotoConnection connection = MotoConnection.getInstance();
 
     // This is the horse game class
     ArrayList<Integer> sequence = new ArrayList<>();
-    ArrayList<Integer> players = new ArrayList<>();
     int numPlayers;
+    int currentPlayer;
     int round;
     int step;
     //final int base = 4;
 
-    // Hello there!
-    
+
     @Override
     public void onGameStart() {
+        sequence.clear();
         super.onGameStart();
         numPlayers = this.getNumPlayers();
-        for (int i=1; i<=numPlayers; i++) {
-            players.add(i);
-        }
         round = 1;
         step = 1;
-        connection.setAllTilesColor(players.get(0));
+        currentPlayer = 1;
+        connection.setAllTilesColor(currentPlayer);
         Log.v("","Game started: Number of Players:" + numPlayers);
     }
 
@@ -48,22 +45,20 @@ public class Horse extends com.example.christine.horse.Game {
 
             if (step < round) { // Compare to sequence
                 if (tile == sequence.get(step-1)){
-                    connection.setTileColor(players.get(0),tile);
+                    connection.setTileColor(currentPlayer,tile);
                     handler.postDelayed(createRunnable(tile),700);
                     step++;
-                } else {
-                    knockout();
                 }
                 //IF WRONG LOSE POINTS OR DIE, NOW IT ONLY WORKS IF RIGHT
             } else if (step == round){ // Add to sequence
                 sequence.add(tile);
                 step++;
-                connection.setTileColor(players.get(0),tile);
+                connection.setTileColor(currentPlayer,tile);
                 handler.postDelayed(createRunnable(tile),700);
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        nextRound(false);
+                        nextRound();
                     }
                 }, 700);
             }
@@ -78,44 +73,13 @@ public class Horse extends com.example.christine.horse.Game {
         handler.removeCallbacksAndMessages(null);
     }
 
-    public void nextRound(boolean knockout) {
+    public void nextRound() {
         handler.removeCallbacksAndMessages(null);
         step = 1;
-        int t = players.remove(0);
-        if (!knockout) {players.add(t); round++;}
-        connection.setAllTilesColor(players.get(0));
-    }
-
-    //Creates animation when player is knocked out
-    public void knockout() {
-        connection.setAllTilesColor(players.get(0));
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                connection.setAllTilesColor(0);
-            }
-        }, 200);
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {connection.setAllTilesColor(players.get(0));
-            }
-        }, 400);
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                connection.setAllTilesColor(0);
-            }
-        }, 600);
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {connection.setAllTilesColor(players.get(0));
-            }
-        }, 800);
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {nextRound(true);
-            }
-        }, 1000);
+        round++;
+        currentPlayer++;
+        if (currentPlayer>numPlayers) currentPlayer=1;
+        connection.setAllTilesColor(currentPlayer);
     }
 
     Handler handler = new Handler();
@@ -128,5 +92,48 @@ public class Horse extends com.example.christine.horse.Game {
         };
         return lightDelay;
     }
+/*
+    // Initialize Horse variables
+    private int player = 1;
+    private int move = 1;
+    private int totalMoves = 4;
+    private int round = 1;
+    private int numPlayers = getNumPlayers();
+
+    public void addToPattern(ArrayList sequence, int numberOfNew) {
+        for (int i = 0; i < numberOfNew; i++) {
+            sequence.append(input[i]);
+        }
+    }
+
+    public boolean comparePattern(ArrayList sequence) {
+        for (int i = 0; i < sequence.length; i++) {
+            if (input[i] != sequence[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void play() {
+        ArrayList sequence = <>;
+        addToPattern(sequence, 4);
+        this.round++;
+        this.player++;
+        boolean playing = comparePattern(sequence);
+
+        while (playing) {
+            addToPattern(sequence, 1);
+            this.round++;
+            this.player++;
+            if (this.player > this.numPlayers) {
+                this.player = 1;
+            }
+            playing = comparePattern(sequence);
+        }
+
+        // When while loop stops, someone made a wrong step in the sequence
+
+    }*/
 }
 

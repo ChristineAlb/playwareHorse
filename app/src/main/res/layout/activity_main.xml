@@ -6,6 +6,29 @@
     android:layout_height="match_parent"
     tools:context="com.example.christine.horse.MainActivity">
 
+    <!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.example.christine.horse.MainActivity">
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scrollbars="vertical">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/TopSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp">-->
 
     <TextView
         android:id="@+id/tilesConnectedLabel"
@@ -50,6 +73,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"/>
+
+        <!--</LinearLayout>-->
 
     <LinearLayout
         android:id="@+id/actionsLayout"
@@ -113,5 +138,12 @@
             android:layout_weight="1"
             android:text="START GAME" />
     </LinearLayout>
+<!--
+    </LinearLayout>
+
+    </ScrollView>
+
+    </RelativeLayout>-->
+
 
 </android.support.constraint.ConstraintLayout>
