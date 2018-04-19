@@ -19,10 +19,6 @@ public class Game {
     private int remaining = 0;
     private int score = 0;
     private int numPlayers = 3;
-    private int player = 1;
-    private int move = 1;
-    private int totalMoves = 4;
-    private int round = 0;
 
     private Handler timerHandler = new Handler();
     private Runnable timerRunnable = new Runnable() {
@@ -79,25 +75,14 @@ public class Game {
         }
     }
 
+    // Set number of players
     public void setNumPlayers(int numPlayers) {
         this.numPlayers = numPlayers;
     }
 
+    // Get number of players
     public int getNumPlayers() {
         return this.numPlayers;
-    }
-
-    public void updateStatus(int addedMoves) {
-        this.round ++;
-        this.player ++;
-        if (this.player > this.numPlayers) {
-            this.player = 1;
-        }
-        this.totalMoves += addedMoves;
-        this.move ++;
-        if (this.move > this.totalMoves) {
-            this.move = 1;
-        }
     }
 
     public void addEvent(byte[] message) {
