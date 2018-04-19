@@ -8,13 +8,12 @@ import com.livelife.motolibrary.Game;
 import com.livelife.motolibrary.MotoConnection;
 import java.util.ArrayList;
 
-/*sdsd*/
-
 public class Horse extends Game {
     MotoConnection connection = MotoConnection.getInstance();
 
     // This is the horse game class
     ArrayList<Integer> sequence = new ArrayList<>();
+    ArrayList<Integer> players = new ArrayList<>();
     int numPlayers;
     int currentPlayer;
     int round;

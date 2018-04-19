@@ -6,6 +6,29 @@
     android:layout_height="match_parent"
     tools:context="com.example.christine.horse.MainActivity">
 
+    <!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.example.christine.horse.MainActivity">
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scrollbars="vertical">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/TopSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp">-->
 
     <TextView
         android:id="@+id/tilesConnectedLabel"
@@ -51,6 +74,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"/>
 
+        <!--</LinearLayout>-->
+
     <LinearLayout
         android:id="@+id/actionsLayout"
         android:layout_width="match_parent"
@@ -77,24 +102,48 @@
             android:text="START UPDATE FIRMWARE"/>
 
     </LinearLayout>
-
     <LinearLayout
+        android:id="@+id/gameLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/actionsLayout">
+        <LinearLayout
+            android:id="@+id/gameSettingsLayout"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:id="@+id/numPlayersText"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Set number of players:"/>
+            <Spinner
+                android:id="@+id/numPlayersSpinner"
+                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                tools:listitem="@layout/spinner_item"
+                android:entries="@array/players"/>
+        </LinearLayout>
         <Button
             android:id="@+id/playGame"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="START GAME"/>
-
+            android:text="START GAME" />
     </LinearLayout>
+<!--
+    </LinearLayout>
+
+    </ScrollView>
+
+    </RelativeLayout>-->
+
 
 </android.support.constraint.ConstraintLayout>
