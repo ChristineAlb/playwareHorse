@@ -6,7 +6,9 @@ import com.livelife.motolibrary.Game;
 import com.livelife.motolibrary.MotoConnection;
 import java.util.ArrayList;
 
-public class Horse extends Game{
+/*sdsd*/
+
+public class Horse extends Game {
     MotoConnection connection = MotoConnection.getInstance();
 
     // This is the horse game class
@@ -34,23 +36,23 @@ public class Horse extends Game{
         int cmd = AntData.getCommand(message);
         int tile = AntData.getId(message);
 
-        if (cmd == AntData.EVENT_PRESS && step < round+base) {
-            if (step==1)connection.setAllTilesColor(0);
+        if (cmd == AntData.EVENT_PRESS && step < round + base) {
+            if (step == 1) connection.setAllTilesColor(0);
             if (round == 1) {
                 sequence.add(tile);
-                connection.setTileColor(currentPlayer,tile);
-                handler.postDelayed(createRunnable(tile),700);
+                connection.setTileColor(currentPlayer, tile);
+                handler.postDelayed(createRunnable(tile), 700);
                 step++;
-                if (step >= round+base) {
+                if (step >= round + base) {
                     nextRound();
                 }
             } else {
-                if (step == round+base){
+                if (step == round + base) {
                     sequence.add(tile);
                     nextRound();
-                }else if (tile == sequence.get(step)) {
-                    connection.setTileColor(currentPlayer,tile);
-                    handler.postDelayed(createRunnable(tile),700);
+                } else if (tile == sequence.get(step)) {
+                    connection.setTileColor(currentPlayer, tile);
+                    handler.postDelayed(createRunnable(tile), 700);
                     step++;
                 }
             }
@@ -69,21 +71,22 @@ public class Horse extends Game{
         step = 1;
         round++;
         currentPlayer++;
-        if (currentPlayer>numPlayers) currentPlayer=1;
+        if (currentPlayer > numPlayers) currentPlayer = 1;
         connection.setAllTilesColor(currentPlayer);
     }
 
     Handler handler = new Handler();
-    private Runnable createRunnable(final int tile){
+
+    private Runnable createRunnable(final int tile) {
         Runnable lightDelay = new Runnable() {
             @Override
             public void run() {
-                connection.setTileColor(0,tile);
+                connection.setTileColor(0, tile);
             }
         };
         return lightDelay;
     }
-
+/*
     // Initialize Horse variables
     private int player = 1;
     private int move = 1;
@@ -91,13 +94,13 @@ public class Horse extends Game{
     private int round = 1;
     private int numPlayers = getNumPlayers();
 
-    public void addToPattern (ArrayList sequence, int numberOfNew) {
+    public void addToPattern(ArrayList sequence, int numberOfNew) {
         for (int i = 0; i < numberOfNew; i++) {
             sequence.append(input[i]);
         }
     }
 
-    public boolean comparePattern (ArrayList sequence) {
+    public boolean comparePattern(ArrayList sequence) {
         for (int i = 0; i < sequence.length; i++) {
             if (input[i] != sequence[i]) {
                 return false;
@@ -106,7 +109,7 @@ public class Horse extends Game{
         return true;
     }
 
-    public void play () {
+    public void play() {
         ArrayList sequence = <>;
         addToPattern(sequence, 4);
         this.round++;
@@ -125,5 +128,6 @@ public class Horse extends Game{
 
         // When while loop stops, someone made a wrong step in the sequence
 
+    }*/
 }
 
