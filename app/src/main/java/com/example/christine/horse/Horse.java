@@ -41,15 +41,16 @@ public class Horse extends Game{
         if (cmd == AntData.EVENT_PRESS && step <= round) {
             if (step==1)connection.setAllTilesColor(0);
 
-            if (step < round) {
+            if (step < round) { // Compare to sequence
                 if (tile == sequence.get(step-1)){
                     connection.setTileColor(currentPlayer,tile);
                     handler.postDelayed(createRunnable(tile),700);
                     step++;
                 }
                 //IF WRONG LOSE POINTS OR DIE, NOW IT ONLY WORKS IF RIGHT
-            } else if (step == round){
+            } else if (step == round){ // Add to sequence
                 sequence.add(tile);
+                step++;
                 connection.setTileColor(currentPlayer,tile);
                 handler.postDelayed(createRunnable(tile),700);
                 handler.postDelayed(new Runnable() {
@@ -59,25 +60,6 @@ public class Horse extends Game{
                     }
                 }, 700);
             }
-
-//            if (round == 1) {
-//                sequence.add(tile);
-//                connection.setTileColor(currentPlayer,tile);
-//                handler.postDelayed(createRunnable(tile),700);
-//                step++;
-//                if (step >= round) {
-//                    nextRound();
-//                }
-//            } else {
-//                if (step == round){
-//                    sequence.add(tile);
-//                    nextRound();
-//                }else if (tile == sequence.get(step)) {
-//                    connection.setTileColor(currentPlayer,tile);
-//                    handler.postDelayed(createRunnable(tile),700);
-//                    step++;
-//                }
-//            }
         }
     }
 
