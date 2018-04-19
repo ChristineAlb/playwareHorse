@@ -18,6 +18,8 @@ public class Game {
     private int duration = 0;
     private int remaining = 0;
     private int score = 0;
+    private int numPlayers = 3;
+
     private Handler timerHandler = new Handler();
     private Runnable timerRunnable = new Runnable() {
         public void run() {
@@ -71,7 +73,16 @@ public class Game {
         if(this.onGameEventListener != null) {
             this.onGameEventListener.onGameScoreEvent(this.score);
         }
+    }
 
+    // Set number of players
+    public void setNumPlayers(int numPlayers) {
+        this.numPlayers = numPlayers;
+    }
+
+    // Get number of players
+    public int getNumPlayers() {
+        return this.numPlayers;
     }
 
     public void addEvent(byte[] message) {
@@ -82,7 +93,6 @@ public class Game {
             case 2:
                 this.onGameUpdate(message);
         }
-
     }
 
     public void startSetup() {
@@ -91,7 +101,6 @@ public class Game {
             this.isSetup = true;
             this.onSetupStart();
         }
-
     }
 
     public void stopSetup() {
@@ -100,7 +109,6 @@ public class Game {
             this.isSetup = false;
             this.onSetupEnd();
         }
-
     }
 
     public void startGame() {
@@ -114,7 +122,6 @@ public class Game {
                 this.timerHandler.postDelayed(this.timerRunnable, 1000L);
             }
         }
-
     }
 
     public void stopGame() {
@@ -124,7 +131,6 @@ public class Game {
             this.timerHandler.removeCallbacksAndMessages((Object)null);
             this.onGameEnd();
         }
-
     }
 
     public void onSetupStart() {
