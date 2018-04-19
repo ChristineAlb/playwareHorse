@@ -13,6 +13,7 @@ public class Horse extends Game{
 
     // This is the horse game class
     ArrayList<Integer> sequence = new ArrayList<>();
+    ArrayList<Integer> players = new ArrayList<>();
     int numPlayers;
     int currentPlayer;
     int round;
