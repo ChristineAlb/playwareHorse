@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import java.lang.Object;
 import java.lang.Thread;
 
-/*sdsd*/
-
 public class HorseHighScore extends com.example.christine.horse.Game {
     MotoConnection connection = MotoConnection.getInstance();
 
