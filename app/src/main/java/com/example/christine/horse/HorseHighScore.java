@@ -20,8 +20,6 @@ public class HorseHighScore extends com.example.christine.horse.Game {
     int step;
     //final int base = 4;
 
-    // Hello there!
-
     @Override
     public void onGameStart() {
         super.onGameStart();
