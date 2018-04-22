@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
     Boolean pairing = false;
     Boolean updating = false;
 
-    Horse game = new Horse();
+    HorseKnockout knockoutGame = new HorseKnockout();
     Button startGameButton;
     boolean playing = false;
 
@@ -145,12 +145,12 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
             @Override
             public void onClick(View view) {
                 if(!playing) {
-                    game.setNumPlayers(numPlayersSpinner.getSelectedItemPosition());
-                    game.startGame();
+                    knockoutGame.setNumPlayers(numPlayersSpinner.getSelectedItemPosition());
+                    knockoutGame.startGame();
                     startGameButton.setText("STOP GAME");
                     numPlayersSpinner.setEnabled(false);
                 } else {
-                    game.stopGame();
+                    knockoutGame.stopGame();
                     startGameButton.setText("START GAME");
                     numPlayersSpinner.setEnabled(true);
                 }
@@ -205,6 +205,7 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
 
     }
 
+
     @Override
     public void onMessageReceived(byte[] bytes, long l) {
 
@@ -220,7 +221,7 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
                 Log.v(tag,"cmd: "+command+" tile: "+tileId);
                 break;
         }
-        game.addEvent(bytes);
+        knockoutGame.addEvent(bytes);
     }
 
     @Override
