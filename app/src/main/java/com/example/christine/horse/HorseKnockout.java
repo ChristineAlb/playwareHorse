@@ -9,8 +9,9 @@ import java.util.ArrayList;
 import java.lang.Object;
 import java.lang.Thread;
 
-public class Horse extends com.example.christine.horse.Game {
+/*sdsd*/
 
+public class HorseKnockout extends com.example.christine.horse.Game {
     MotoConnection connection = MotoConnection.getInstance();
 
     // This is the horse game class
@@ -21,7 +22,7 @@ public class Horse extends com.example.christine.horse.Game {
     int step;
     //final int base = 4;
 
-    // Hello there! 234
+    // Hello there!
 
     @Override
     public void onGameStart() {
@@ -46,14 +47,13 @@ public class Horse extends com.example.christine.horse.Game {
             if (step==1)connection.setAllTilesColor(0);
 
             if (step < round) { // Compare to sequence
-                if (tile == sequence.get(step-1)){
+                if (tile == sequence.get(step-1)){ // Correct move
                     connection.setTileColor(players.get(0),tile);
                     handler.postDelayed(createRunnable(tile),700);
                     step++;
-                } else {
+                } else { // Wrong move
                     knockout();
                 }
-                //IF WRONG LOSE POINTS OR DIE, NOW IT ONLY WORKS IF RIGHT
             } else if (step == round){ // Add to sequence
                 sequence.add(tile);
                 step++;
@@ -79,6 +79,11 @@ public class Horse extends com.example.christine.horse.Game {
 
     public void nextRound(boolean knockout) {
         handler.removeCallbacksAndMessages(null);
+        if (players.size()==1){
+            // WE HAVE A WINNER!!!
+            // run win animation
+            // End game
+        }
         step = 1;
         int t = players.remove(0);
         if (!knockout) {players.add(t); round++;}
@@ -112,9 +117,20 @@ public class Horse extends com.example.christine.horse.Game {
         }, 800);
         handler.postDelayed(new Runnable() {
             @Override
-            public void run() {nextRound(true);
+            public void run() {
+                connection.setAllTilesColor(0);
             }
         }, 1000);
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {connection.setAllTilesColor(players.get(0));
+            }
+        }, 1200);
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {nextRound(true);
+            }
+        }, 1500);
     }
 
     Handler handler = new Handler();
@@ -128,4 +144,3 @@ public class Horse extends com.example.christine.horse.Game {
         return lightDelay;
     }
 }
-
