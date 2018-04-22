@@ -1,10 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.christine.horse.MainActivity">-->
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -38,14 +32,6 @@
             android:layout_marginTop="16dp"
             android:gravity="center_vertical"
             android:text="Select channel" />
-            <!--android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:text="Select channel"/>-->
-            <!--android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"-->
-            <!--app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>-->
 
         <Spinner
             android:id="@+id/spinner"
@@ -55,8 +41,6 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="16dp"
             android:entries="@array/channels"/>
-            <!--  app:layout_constraintStart_toEndOf="@+id/textView"
-            app:layout_constraintTop_toTopOf="parent"/>-->
 
         <TextView
             android:id="@+id/tilesConnectedLabel"
@@ -65,8 +49,6 @@
             android:layout_height="30dp"
             android:layout_marginStart="30dp"
             android:layout_marginTop="16dp"/>
-            <!--app:layout_constraintTop_toTopOf="@id/spinner"
-            app:layout_constraintStart_toEndOf="@id/spinner"-->
 
     </LinearLayout>
 
@@ -79,8 +61,6 @@
         android:layout_marginTop="16dp"
         android:gravity="start"
         android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TopSpinner">
 
         <Button
@@ -88,12 +68,6 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:text="Connect"/>
-            <!--android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"-->
-           <!-- app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView"-->
 
         <Button
             android:id="@+id/pairingButton"
@@ -153,8 +127,9 @@
             android:id="@+id/ScoreBoard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:padding="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal"
             app:layout_constraintTop_toBottomOf="@+id/GameLayout">
 
@@ -162,7 +137,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="1dp"
-                android:layout_marginLeft="1dp"
+                android:layout_marginLeft="4dp"
                 android:layout_marginTop="1dp"
                 android:layout_marginBottom="1dp"
                 android:layout_weight="1"
@@ -231,7 +206,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="1dp"
+                android:layout_marginRight="4dp"
                 android:layout_marginLeft="1dp"
                 android:layout_marginTop="1dp"
                 android:layout_marginBottom="1dp"
@@ -269,7 +244,9 @@
             android:id="@+id/ScoreBoard2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="1dp"
             android:orientation="horizontal"
             app:layout_constraintTop_toBottomOf="@+id/ScoreBoard">
 
@@ -277,7 +254,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="1dp"
-                android:layout_marginLeft="1dp"
+                android:layout_marginLeft="4dp"
                 android:layout_marginTop="1dp"
                 android:layout_marginBottom="1dp"
                 android:layout_weight="1"
@@ -346,7 +323,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="1dp"
+                android:layout_marginRight="4dp"
                 android:layout_marginLeft="1dp"
                 android:layout_marginTop="1dp"
                 android:layout_marginBottom="1dp"
@@ -386,5 +363,3 @@
 
     </RelativeLayout>
 
-
-<!--</android.support.constraint.ConstraintLayout>-->
