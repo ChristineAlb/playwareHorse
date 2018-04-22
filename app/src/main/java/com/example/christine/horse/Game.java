@@ -3,9 +3,11 @@
 // (powered by Fernflower decompiler)
 //
 
-package com.livelife.motolibrary;
+package com.example.christine.horse;
 
 import android.os.Handler;
+
+import java.util.ArrayList;
 
 public class Game {
     private Game.OnGameEventListener onGameEventListener;
@@ -18,7 +20,8 @@ public class Game {
     private int duration = 0;
     private int remaining = 0;
     private int score = 0;
-    private int numPlayers = 3;
+    private int numPlayers = 0;
+    ArrayList<Integer> players = new ArrayList<>();
 
     private Handler timerHandler = new Handler();
     private Runnable timerRunnable = new Runnable() {
@@ -145,6 +148,13 @@ public class Game {
     public int getNumPlayers() {
         return this.numPlayers;
     }
+
+    //Update players
+    public void setPlayers(ArrayList Players) {this.players = Players;}
+
+    //Get players
+    public ArrayList getPlayers() {return this.players;}
+
 
     public void addEvent(byte[] message) {
         switch(this.currentState) {
