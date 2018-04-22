@@ -95,7 +95,6 @@ public class Game {
     public ArrayList getPlayers() {return this.players;}
 
 
-
     public void addEvent(byte[] message) {
         switch(this.currentState) {
             case 1:
