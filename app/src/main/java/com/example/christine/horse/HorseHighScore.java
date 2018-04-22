@@ -86,38 +86,6 @@ public class HorseHighScore extends com.example.christine.horse.Game {
         connection.setAllTilesColor(players.get(0));
     }
 
-    //Creates animation when player is knocked out
-    public void knockout() {
-        connection.setAllTilesColor(players.get(0));
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                connection.setAllTilesColor(0);
-            }
-        }, 200);
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {connection.setAllTilesColor(players.get(0));
-            }
-        }, 400);
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                connection.setAllTilesColor(0);
-            }
-        }, 600);
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {connection.setAllTilesColor(players.get(0));
-            }
-        }, 800);
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {nextRound(true);
-            }
-        }, 1000);
-    }
-
     Handler handler = new Handler();
     private Runnable createRunnable(final int tile){
         Runnable lightDelay = new Runnable() {
