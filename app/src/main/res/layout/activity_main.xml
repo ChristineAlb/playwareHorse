@@ -105,6 +105,17 @@
                 android:layout_width="wrap_content"
                 tools:listitem="@layout/spinner_item"
                 android:entries="@array/players"/>
+            <TextView
+                android:id="@+id/gameModeText"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Set Game Mode"/>
+            <Spinner
+                android:id="@+id/gameModeSpinner"
+                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                tools:listitem="@layout/spinner_item"
+                android:entries="@array/gamemode"/>
         </LinearLayout>
         <Button
             android:id="@+id/playGame"

@@ -22,6 +22,7 @@ public class Game {
     private int score = 0;
     private int numPlayers = 0;
     ArrayList<Integer> players = new ArrayList<>();
+    private boolean timing;
 
     private Handler timerHandler = new Handler();
     private Runnable timerRunnable = new Runnable() {
@@ -94,6 +95,11 @@ public class Game {
     //Get players
     public ArrayList getPlayers() {return this.players;}
 
+    //Set if timer
+    public void setIfTiming(boolean Timing) {this.timing = Timing;}
+
+    //Get if timer
+    public boolean getIfTiming() {return this.timing;}
 
     public void addEvent(byte[] message) {
         switch(this.currentState) {
