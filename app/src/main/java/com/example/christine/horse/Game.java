@@ -3,7 +3,7 @@
 // (powered by Fernflower decompiler)
 //
 
-package com.livelife.motolibrary;
+package com.example.christine.horse;
 
 import android.os.Handler;
 

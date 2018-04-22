@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 /*sdsd*/
 
-public class Horse extends Game {
+public class Horse extends com.example.christine.horse.Game {
     MotoConnection connection = MotoConnection.getInstance();
 
     // This is the horse game class
@@ -19,6 +19,7 @@ public class Horse extends Game {
     int numPlayers;
     int round;
     int step;
+    =AntData.
     //final int base = 4;
 
     // Hello there!
