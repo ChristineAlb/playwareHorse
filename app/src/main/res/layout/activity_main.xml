@@ -66,20 +66,25 @@
         <Button
             android:id="@+id/connectButton"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
             android:text="Connect"/>
 
         <Button
             android:id="@+id/pairingButton"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
             android:text="START PAIRING TILES"/>
 
         <Button
             android:id="@+id/updFirmwareButton"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
             android:text="START UPDATE FIRMWARE"/>
+        <Button
+            android:id="@+id/testFirmwareButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Test Firmware"/>
 
     </LinearLayout>
 

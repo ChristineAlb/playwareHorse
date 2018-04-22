@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
     MotoConnection connection;
 
     Spinner spinner,numPlayersSpinner, gameModeSpinner;
-    Button connectButton,pairingButton,updFirmwareButton;
+    Button connectButton,pairingButton,updFirmwareButton,testFirmwareButton;
     LinearLayout actionsLayout;
     TextView tilesConnectedLabel;
 
@@ -137,6 +137,14 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
                 }
 
                 updating = !updating;
+            }
+        });
+
+        testFirmwareButton = (Button) findViewById(R.id.testFirmwareButton);
+        testFirmwareButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // INSERT FIRMWARE TESTING CODE HERE!!!
             }
         });
 
