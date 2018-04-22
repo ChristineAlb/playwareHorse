@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
     private static String tag = MainActivity.class.getSimpleName();
     MotoConnection connection;
 
-    Spinner spinner,numPlayersSpinner;
+    Spinner spinner,numPlayersSpinner, gameModeSpinner;
     Button connectButton,pairingButton,updFirmwareButton;
     LinearLayout actionsLayout;
     TextView tilesConnectedLabel;
@@ -38,6 +38,9 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
     HorseKnockout knockoutGame = new HorseKnockout();
     Button startGameButton;
     boolean playing = false;
+    int gameMode;
+
+    HorseHighScore highscoreGame = new HorseHighScore();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,15 +147,35 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
         startGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                gameMode = gameModeSpinner.getSelectedItemPosition();
                 if(!playing) {
-                    knockoutGame.setNumPlayers(numPlayersSpinner.getSelectedItemPosition());
-                    knockoutGame.startGame();
+                    switch (gameMode) {
+                        case 0: knockoutGame.setNumPlayers(numPlayersSpinner.getSelectedItemPosition());
+                                knockoutGame.setIfTiming(false);
+                                knockoutGame.startGame();
+                        case 1: knockoutGame.setNumPlayers(numPlayersSpinner.getSelectedItemPosition());
+                                knockoutGame.setIfTiming(true);
+                                knockoutGame.startGame();
+                        case 2: highscoreGame.setNumPlayers(numPlayersSpinner.getSelectedItemPosition());
+                                highscoreGame.setIfTiming(false);
+                                highscoreGame.startGame();
+                        case 3: highscoreGame.setNumPlayers(numPlayersSpinner.getSelectedItemPosition());
+                                highscoreGame.setIfTiming(true);
+                                highscoreGame.startGame();
+                    }
                     startGameButton.setText("STOP GAME");
                     numPlayersSpinner.setEnabled(false);
+                    gameModeSpinner.setEnabled(false);
                 } else {
-                    knockoutGame.stopGame();
+                    switch (gameMode) {
+                        case 0: knockoutGame.stopGame();
+                        case 1: knockoutGame.stopGame();
+                        case 2: highscoreGame.stopGame();
+                        case 3: highscoreGame.stopGame();
+                    }
                     startGameButton.setText("START GAME");
                     numPlayersSpinner.setEnabled(true);
+                    gameModeSpinner.setEnabled(true);
                 }
                 playing = !playing;
             }
@@ -161,6 +184,10 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
         numPlayersSpinner = (Spinner) findViewById(R.id.numPlayersSpinner);
         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, R.layout.spinner_item, getResources().getStringArray(R.array.players));
         numPlayersSpinner.setAdapter(adapter2);
+
+        gameModeSpinner = (Spinner) findViewById(R.id.gameModeSpinner);
+        ArrayAdapter<String> adapter3 = new ArrayAdapter<String>(this,R.layout.spinner_item,getResources().getStringArray(R.array.gamemode));
+        gameModeSpinner.setAdapter(adapter3);
         //
     }
 
