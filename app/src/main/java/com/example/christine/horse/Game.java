@@ -79,6 +79,67 @@ public class Game {
         }
     }
 
+   /*public void incrementScoreRed(int scoreToAdd) {
+        this.scorered += scoreToAdd;
+        if(this.onGameEventListener != null) {
+            this.onGameEventListener.onGameScoreEvent(this.scorered);
+        }
+    }
+
+    public void incrementScoreBlue(int scoreToAdd) {
+        this.scoreblue += scoreToAdd;
+        if(this.onGameEventListener != null) {
+            this.onGameEventListener.onGameScoreEvent(this.scoreblue);
+        }
+    }
+
+    public void incrementScoreGreen(int scoreToAdd) {
+        this.scoregreen += scoreToAdd;
+        if(this.onGameEventListener != null) {
+            this.onGameEventListener.onGameScoreEvent(this.scoregreen);
+        }
+    }
+
+    public void incrementScoreViolet(int scoreToAdd) {
+        this.scoreviolet += scoreToAdd;
+        if(this.onGameEventListener != null) {
+            this.onGameEventListener.onGameScoreEvent(this.scoreviolet);
+        }
+    }
+
+    public void incrementScoreYellow(int scoreToAdd) {
+        this.scoreyellow += scoreToAdd;
+        if(this.onGameEventListener != null) {
+            this.onGameEventListener.onGameScoreEvent(this.scoreyellow);
+        }
+    }
+
+    public void incrementScoreWhite(int scoreToAdd) {
+        this.scorewhite += scoreToAdd;
+        if(this.onGameEventListener != null) {
+            this.onGameEventListener.onGameScoreEvent(this.scorewhite);
+        }
+    }
+
+    public int getRedScore() {
+        return this.scorered;
+    }
+    public int getBlueScore() {
+        return this.scoreblue;
+    }
+    public int getGreenScore() {
+        return this.scoregreen;
+    }
+    public int getVioletScore() {
+        return this.scorepurple;
+    }
+    public int getYellowScore() {
+        return this.scoreyellow;
+    }
+    public int getWhiteScore() {
+        return this.scorewhite;
+    }*/
+
     // Set number of players
     public void setNumPlayers(int numPlayers) {
         this.numPlayers = numPlayers;
