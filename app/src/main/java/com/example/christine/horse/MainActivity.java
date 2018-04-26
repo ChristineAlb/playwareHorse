@@ -156,7 +156,6 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
                 data.setSingleLed(0, 5);
                 data.setSingleLed(0, 6);
                 data.setSingleLed(0, 7);
-                data.setSingleLed(0, 8);
                 connection.update(data);
             }
         });
