@@ -143,7 +143,7 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
         testFirmwareButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // INSERT FIRMWARE TESTING CODE HERE!!!
+                //setSingleLed(1, 1);
             }
         });
 
