@@ -36,11 +36,10 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
     Boolean updating = false;
 
     HorseKnockout knockoutGame = new HorseKnockout();
+    HorseHighScore highscoreGame = new HorseHighScore();
     Button startGameButton;
     boolean playing = false;
     int gameMode;
-
-    HorseHighScore highscoreGame = new HorseHighScore();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

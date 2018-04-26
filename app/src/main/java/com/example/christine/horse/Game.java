@@ -19,7 +19,8 @@ public class Game {
     private String description;
     private int duration = 0;
     private int remaining = 0;
-    private int score = 0;
+//    private int score = 0;
+    int score[] = new int[6];
     private int numPlayers = 0;
     ArrayList<Integer> players = new ArrayList<>();
     private boolean timing;
@@ -72,11 +73,23 @@ public class Game {
         this.remaining = duration;
     }
 
-    public void incrementScore(int scoreToAdd) {
-        this.score += scoreToAdd;
+    public void incrementScore(int scoreToAdd, int player) {
+        this.score[player] += scoreToAdd;
         if(this.onGameEventListener != null) {
-            this.onGameEventListener.onGameScoreEvent(this.score);
+            this.onGameEventListener.onGameScoreEvent(this.score[player]);
         }
+    }
+
+    public int getScore(int player) {
+        return this.score[player];
+    }
+
+    public int getWinner() {
+        int t = 0;
+        for (int i=0; i<this.numPlayers;i ++){
+            if (this.score[i] > t) t = i;
+        }
+        return t;
     }
 
    /*public void incrementScoreRed(int scoreToAdd) {
@@ -193,7 +206,12 @@ public class Game {
             this.isPlaying = true;
             this.currentState = 2;
             this.remaining = this.duration;
-            this.score = 0;
+            this.score[0] = 0;
+            this.score[1] = 0;
+            this.score[2] = 0;
+            this.score[4] = 0;
+            this.score[3] = 0;
+            this.score[5] = 0;
             this.onGameStart();
             if(this.duration != 0) {
                 this.timerHandler.postDelayed(this.timerRunnable, 1000L);
@@ -205,7 +223,7 @@ public class Game {
         if(this.isPlaying) {
             this.isPlaying = false;
             this.currentState = 0;
-            this.timerHandler.removeCallbacksAndMessages((Object)null);
+            this.timerHandler.removeCallbacksAndMessages(null);
             this.onGameEnd();
         }
     }
