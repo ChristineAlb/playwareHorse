@@ -213,7 +213,14 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
                 MainActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-
+                        switch (player) {
+                            case 1: teamRedScore.setText(""+score+"");
+                            case 2: teamBlueScore.setText(""+score+"");
+                            case 3: teamGreenScore.setText(""+score+"");
+                            case 4: teamVioletScore.setText(""+score+"");
+                            case 5: teamYellowScore.setText(""+score+"");
+                            case 6: teamWhiteScore.setText(""+score+"");
+                        }
                     }
                 });
             }
@@ -286,6 +293,7 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
                 break;
         }
         knockoutGame.addEvent(bytes);
+        highscoreGame.addEvent(bytes);
     }
 
     @Override
