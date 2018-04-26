@@ -19,6 +19,8 @@ import com.livelife.motolibrary.MotoConnection;
 import com.livelife.motolibrary.MotoGame;
 import com.livelife.motolibrary.OnAntEventListener;
 
+import org.w3c.dom.Text;
+
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -31,6 +33,8 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
     Button connectButton,pairingButton,updFirmwareButton,testFirmwareButton;
     LinearLayout actionsLayout;
     TextView tilesConnectedLabel;
+
+    TextView teamRedScore,teamBlueScore,teamGreenScore,teamVioletScore,teamYellowScore,teamWhiteScore;
 
     Boolean isConnected = false;
     Boolean pairing = false;
@@ -169,6 +173,14 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
 
         tilesConnectedLabel = (TextView) findViewById(R.id.tilesConnectedLabel);
 
+        teamRedScore = (TextView) findViewById(R.id.team_red_score);
+        teamBlueScore = (TextView) findViewById(R.id.team_blue_score);
+        teamGreenScore = (TextView) findViewById(R.id.team_green_score);
+        teamVioletScore = (TextView) findViewById(R.id.team_violet_score);
+        teamYellowScore = (TextView) findViewById(R.id.team_yellow_score);
+        teamWhiteScore = (TextView) findViewById(R.id.team_white_score);
+
+
         // Game stuff goes here
         startGameButton = (Button) findViewById(R.id.playGame);
         startGameButton.setOnClickListener(new View.OnClickListener() {
@@ -208,6 +220,21 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
             }
         });
 
+        knockoutGame.setOnGameEventListener(new Game.OnGameEventListener() {
+            @Override
+            public void onGameTimerEvent(int var1) {
+            }
+
+            @Override
+            public void onGameScoreEvent(final int score, final int player) {
+                MainActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                    }
+                });
+            }
+        });
         numPlayersSpinner = (Spinner) findViewById(R.id.numPlayersSpinner);
         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, R.layout.spinner_item, getResources().getStringArray(R.array.players));
         numPlayersSpinner.setAdapter(adapter2);
