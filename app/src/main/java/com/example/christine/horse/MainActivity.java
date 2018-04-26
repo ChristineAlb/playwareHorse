@@ -213,7 +213,7 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
                 MainActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        
+
                     }
                 });
             }
