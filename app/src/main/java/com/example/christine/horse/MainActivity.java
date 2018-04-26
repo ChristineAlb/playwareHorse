@@ -150,11 +150,17 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
             public void onClick(View view) {
                 AntData data = new AntData((byte) 1);
                 data.setSingleLed(1, 1);
+                connection.update(data);
                 data.setSingleLed(2, 2);
+                connection.update(data);
                 data.setSingleLed(3, 3);
+                connection.update(data);
                 data.setSingleLed(0, 4);
+                connection.update(data);
                 data.setSingleLed(0, 5);
+                connection.update(data);
                 data.setSingleLed(0, 6);
+                connection.update(data);
                 data.setSingleLed(0, 7);
                 connection.update(data);
             }
