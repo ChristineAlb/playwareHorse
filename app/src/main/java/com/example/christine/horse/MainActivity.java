@@ -325,7 +325,8 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
         AntData data = new AntData((byte) tileID);
         byte col = (byte) color;
         byte freq = (byte) frequency;
-        byte[] col_freq = {col, freq};
+        byte tile = (byte) tileID;
+        byte[] col_freq = {tile, 42, col, freq};
         data.setBroadcastData(col_freq);
         connection.update(data);
     }
