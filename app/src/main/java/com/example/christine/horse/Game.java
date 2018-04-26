@@ -6,6 +6,7 @@
 package com.example.christine.horse;
 
 import android.os.Handler;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -75,6 +76,7 @@ public class Game {
 
     public void incrementScore(int scoreToAdd, int player) {
         this.score[player] += scoreToAdd;
+        Log.v("","Player: "+player+". Score: "+this.score[player]);
         if(this.onGameEventListener != null) {
             this.onGameEventListener.onGameScoreEvent(this.score[player],player);
         }

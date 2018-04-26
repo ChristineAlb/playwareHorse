@@ -174,16 +174,16 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
                 gameMode = gameModeSpinner.getSelectedItemPosition();
                 if(!playing) {
                     switch (gameMode) {
-                        case 0: knockoutGame.setNumPlayers(numPlayersSpinner.getSelectedItemPosition());
+                        case 0: knockoutGame.setNumPlayers(numPlayersSpinner.getSelectedItemPosition()+1);
                                 knockoutGame.setIfTiming(false);
                                 knockoutGame.startGame();
-                        case 1: knockoutGame.setNumPlayers(numPlayersSpinner.getSelectedItemPosition());
+                        case 1: knockoutGame.setNumPlayers(numPlayersSpinner.getSelectedItemPosition()+1);
                                 knockoutGame.setIfTiming(true);
                                 knockoutGame.startGame();
-                        case 2: highscoreGame.setNumPlayers(numPlayersSpinner.getSelectedItemPosition());
+                        case 2: highscoreGame.setNumPlayers(numPlayersSpinner.getSelectedItemPosition()+1);
                                 highscoreGame.setIfTiming(false);
                                 highscoreGame.startGame();
-                        case 3: highscoreGame.setNumPlayers(numPlayersSpinner.getSelectedItemPosition());
+                        case 3: highscoreGame.setNumPlayers(numPlayersSpinner.getSelectedItemPosition()+1);
                                 highscoreGame.setIfTiming(true);
                                 highscoreGame.startGame();
                     }
@@ -234,6 +234,22 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
         gameModeSpinner = (Spinner) findViewById(R.id.gameModeSpinner);
         ArrayAdapter<String> adapter3 = new ArrayAdapter<String>(this,R.layout.spinner_item,getResources().getStringArray(R.array.gamemode));
         gameModeSpinner.setAdapter(adapter3);
+
+        numPlayersSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (i!=0) {
+                    startGameButton.setEnabled(true);
+                } else {
+                    startGameButton.setEnabled(false);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         //
     }
 
