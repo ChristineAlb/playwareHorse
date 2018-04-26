@@ -323,7 +323,9 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
 
     public void setfadeBreathing(int color, int frequency, int tileID) {
         AntData data = new AntData((byte) tileID);
-        byte[] col_freq = {color, frequency}
+        byte col = (byte) color;
+        byte freq = (byte) frequency;
+        byte[] col_freq = {col, freq};
         data.setBroadcastData(col_freq);
         connection.update(data);
     }
