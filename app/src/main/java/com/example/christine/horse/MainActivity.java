@@ -149,9 +149,8 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
             @Override
             public void onClick(View view) {
                 AntData data = new AntData((byte) 1);
-                data.setColor(3, 4);
-                data.setColor(4);
                 data.setSingleLed(1, 1);
+                connection.update(data);
             }
         });
 
