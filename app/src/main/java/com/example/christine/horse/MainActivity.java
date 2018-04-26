@@ -46,6 +46,8 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
     boolean playing = false;
     int gameMode;
 
+    int click = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -148,9 +150,9 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
         testFirmwareButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                connection.setAllTilesColor(2);
-                AntData data = new AntData((byte) 39);
-                data.setSingleLed(1, 1);
+                //setSingleLed(click, click, 1);
+                setfadeBreathing(click, 10, 1);
+                click++;
             }
         });
 
@@ -313,4 +315,19 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
 
     }
 
+    public void setSingleLed(int color, int tileID, int ledID) {
+        AntData data = new AntData((byte) tileID);
+        data.setSingleLed(color, ledID);
+        connection.update(data);
+    }
+
+    public void setfadeBreathing(int color, int frequency, int tileID) {
+        AntData data = new AntData((byte) tileID);
+        byte col = (byte) color;
+        byte freq = (byte) frequency;
+        byte tile = (byte) tileID;
+        byte[] col_freq = {tile, 42, col, freq, 0, 0, 0, 0};
+        data.setBroadcastData(col_freq);
+        connection.update(data);
+    }
 }
