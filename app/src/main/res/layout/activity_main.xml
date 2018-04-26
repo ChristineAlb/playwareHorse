@@ -1,10 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.christine.horse.MainActivity">-->
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -38,14 +32,6 @@
             android:layout_marginTop="16dp"
             android:gravity="center_vertical"
             android:text="Select channel" />
-            <!--android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:text="Select channel"/>-->
-            <!--android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"-->
-            <!--app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>-->
 
         <Spinner
             android:id="@+id/spinner"
@@ -55,8 +41,6 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="16dp"
             android:entries="@array/channels"/>
-            <!--  app:layout_constraintStart_toEndOf="@+id/textView"
-            app:layout_constraintTop_toTopOf="parent"/>-->
 
         <TextView
             android:id="@+id/tilesConnectedLabel"
@@ -65,8 +49,6 @@
             android:layout_height="30dp"
             android:layout_marginStart="30dp"
             android:layout_marginTop="16dp"/>
-            <!--app:layout_constraintTop_toTopOf="@id/spinner"
-            app:layout_constraintStart_toEndOf="@id/spinner"-->
 
     </LinearLayout>
 
@@ -79,33 +61,30 @@
         android:layout_marginTop="16dp"
         android:gravity="start"
         android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TopSpinner">
 
         <Button
             android:id="@+id/connectButton"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
             android:text="Connect"/>
-            <!--android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"-->
-           <!-- app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView"-->
 
         <Button
             android:id="@+id/pairingButton"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
             android:text="START PAIRING TILES"/>
 
         <Button
             android:id="@+id/updFirmwareButton"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
             android:text="START UPDATE FIRMWARE"/>
+        <Button
+            android:id="@+id/testFirmwareButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Test Firmware"/>
 
     </LinearLayout>
 
@@ -138,7 +117,17 @@
                 android:layout_width="wrap_content"
                 tools:listitem="@layout/spinner_item"
                 android:entries="@array/players"/>
-
+            <TextView
+                android:id="@+id/gameModeText"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Set Game Mode"/>
+            <Spinner
+                android:id="@+id/gameModeSpinner"
+                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                tools:listitem="@layout/spinner_item"
+                android:entries="@array/gamemode"/>
         </LinearLayout>
 
         <Button
@@ -153,7 +142,9 @@
             android:id="@+id/ScoreBoard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#999"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal"
             app:layout_constraintTop_toBottomOf="@+id/GameLayout">
 
@@ -161,8 +152,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="1dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
                 android:layout_weight="1"
-                android:background="#fff4f4f4"
+                android:background="#ff6347"
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
                 android:padding="16dp">
@@ -177,10 +171,10 @@
                     android:textSize="20sp" />
 
                 <TextView
-                    android:id="@+id/team_a_score"
+                    android:id="@+id/team_red_score"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="10dp"
                     android:fontFamily="sans-serif-light"
                     android:text="0"
                     android:textAllCaps="true"
@@ -193,8 +187,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="1dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
                 android:layout_weight="1"
-                android:background="#fff4f4f4"
+                android:background="#87cefa"
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
                 android:padding="16dp">
@@ -209,10 +206,162 @@
                     android:textSize="20sp" />
 
                 <TextView
-                    android:id="@+id/team_b_score"
+                    android:id="@+id/team_blue_score"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="sans-serif-light"
+                    android:text="0"
+                    android:textAllCaps="true"
+                    android:textColor="#000"
+                    android:textSize="56sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="4dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
+                android:layout_weight="1"
+                android:background="#98fb98"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="Team Green"
+                    android:textAllCaps="true"
+                    android:textColor="#000"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/team_green_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="sans-serif-light"
+                    android:text="0"
+                    android:textAllCaps="true"
+                    android:textColor="#000"
+                    android:textSize="56sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ScoreBoard2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="1dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/ScoreBoard">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="1dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
+                android:layout_weight="1"
+                android:background="#ee82ee"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="Team violet"
+                    android:textAllCaps="true"
+                    android:textColor="#000"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/team_violet_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="sans-serif-light"
+                    android:text="0"
+                    android:textAllCaps="true"
+                    android:textColor="#000"
+                    android:textSize="56sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="1dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
+                android:layout_weight="1"
+                android:background="#ffff00"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="Team yellow"
+                    android:textAllCaps="true"
+                    android:textColor="#000"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/team_yellow_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="sans-serif-light"
+                    android:text="0"
+                    android:textAllCaps="true"
+                    android:textColor="#000"
+                    android:textSize="56sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="4dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
+                android:layout_weight="1"
+                android:background="#ffffff"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="Team white"
+                    android:textAllCaps="true"
+                    android:textColor="#000"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/team_white_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:fontFamily="sans-serif-light"
                     android:text="0"
                     android:textAllCaps="true"
@@ -229,5 +378,3 @@
 
     </RelativeLayout>
 
-
-<!--</android.support.constraint.ConstraintLayout>-->

@@ -14,8 +14,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.livelife.motolibrary.AntData;
-//import com.example.christine.horse.AntData;
-import com.livelife.motolibrary.Game;
 import com.livelife.motolibrary.MotoConnection;
 import com.livelife.motolibrary.MotoConnection;
 import com.livelife.motolibrary.MotoGame;
@@ -28,8 +26,8 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
     private static String tag = MainActivity.class.getSimpleName();
     MotoConnection connection;
 
-    Spinner spinner,numPlayersSpinner;
-    Button connectButton,pairingButton,updFirmwareButton;
+    Spinner spinner,numPlayersSpinner, gameModeSpinner;
+    Button connectButton,pairingButton,updFirmwareButton,testFirmwareButton;
     LinearLayout actionsLayout;
     TextView tilesConnectedLabel;
 
@@ -37,9 +35,12 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
     Boolean pairing = false;
     Boolean updating = false;
 
-    Horse game = new Horse();
+    HorseKnockout knockoutGame = new HorseKnockout();
     Button startGameButton;
     boolean playing = false;
+    int gameMode;
+
+    HorseHighScore highscoreGame = new HorseHighScore();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,6 +140,14 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
             }
         });
 
+        testFirmwareButton = (Button) findViewById(R.id.testFirmwareButton);
+        testFirmwareButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // INSERT FIRMWARE TESTING CODE HERE!!!
+            }
+        });
+
         tilesConnectedLabel = (TextView) findViewById(R.id.tilesConnectedLabel);
 
         // Game stuff goes here
@@ -146,15 +155,35 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
         startGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                gameMode = gameModeSpinner.getSelectedItemPosition();
                 if(!playing) {
-                    game.setNumPlayers(numPlayersSpinner.getSelectedItemPosition());
-                    game.startGame();
+                    switch (gameMode) {
+                        case 0: knockoutGame.setNumPlayers(numPlayersSpinner.getSelectedItemPosition());
+                                knockoutGame.setIfTiming(false);
+                                knockoutGame.startGame();
+                        case 1: knockoutGame.setNumPlayers(numPlayersSpinner.getSelectedItemPosition());
+                                knockoutGame.setIfTiming(true);
+                                knockoutGame.startGame();
+                        case 2: highscoreGame.setNumPlayers(numPlayersSpinner.getSelectedItemPosition());
+                                highscoreGame.setIfTiming(false);
+                                highscoreGame.startGame();
+                        case 3: highscoreGame.setNumPlayers(numPlayersSpinner.getSelectedItemPosition());
+                                highscoreGame.setIfTiming(true);
+                                highscoreGame.startGame();
+                    }
                     startGameButton.setText("STOP GAME");
                     numPlayersSpinner.setEnabled(false);
+                    gameModeSpinner.setEnabled(false);
                 } else {
-                    game.stopGame();
+                    switch (gameMode) {
+                        case 0: knockoutGame.stopGame();
+                        case 1: knockoutGame.stopGame();
+                        case 2: highscoreGame.stopGame();
+                        case 3: highscoreGame.stopGame();
+                    }
                     startGameButton.setText("START GAME");
                     numPlayersSpinner.setEnabled(true);
+                    gameModeSpinner.setEnabled(true);
                 }
                 playing = !playing;
             }
@@ -163,6 +192,10 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
         numPlayersSpinner = (Spinner) findViewById(R.id.numPlayersSpinner);
         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, R.layout.spinner_item, getResources().getStringArray(R.array.players));
         numPlayersSpinner.setAdapter(adapter2);
+
+        gameModeSpinner = (Spinner) findViewById(R.id.gameModeSpinner);
+        ArrayAdapter<String> adapter3 = new ArrayAdapter<String>(this,R.layout.spinner_item,getResources().getStringArray(R.array.gamemode));
+        gameModeSpinner.setAdapter(adapter3);
         //
     }
 
@@ -207,6 +240,7 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
 
     }
 
+
     @Override
     public void onMessageReceived(byte[] bytes, long l) {
 
@@ -222,7 +256,7 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
                 Log.v(tag,"cmd: "+command+" tile: "+tileId);
                 break;
         }
-        game.addEvent(bytes);
+        knockoutGame.addEvent(bytes);
     }
 
     @Override

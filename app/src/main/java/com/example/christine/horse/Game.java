@@ -3,9 +3,11 @@
 // (powered by Fernflower decompiler)
 //
 
-package com.livelife.motolibrary;
+package com.example.christine.horse;
 
 import android.os.Handler;
+
+import java.util.ArrayList;
 
 public class Game {
     private Game.OnGameEventListener onGameEventListener;
@@ -18,7 +20,9 @@ public class Game {
     private int duration = 0;
     private int remaining = 0;
     private int score = 0;
-    private int numPlayers = 3;
+    private int numPlayers = 0;
+    ArrayList<Integer> players = new ArrayList<>();
+    private boolean timing;
 
     private Handler timerHandler = new Handler();
     private Runnable timerRunnable = new Runnable() {
@@ -75,6 +79,67 @@ public class Game {
         }
     }
 
+   /*public void incrementScoreRed(int scoreToAdd) {
+        this.scorered += scoreToAdd;
+        if(this.onGameEventListener != null) {
+            this.onGameEventListener.onGameScoreEvent(this.scorered);
+        }
+    }
+
+    public void incrementScoreBlue(int scoreToAdd) {
+        this.scoreblue += scoreToAdd;
+        if(this.onGameEventListener != null) {
+            this.onGameEventListener.onGameScoreEvent(this.scoreblue);
+        }
+    }
+
+    public void incrementScoreGreen(int scoreToAdd) {
+        this.scoregreen += scoreToAdd;
+        if(this.onGameEventListener != null) {
+            this.onGameEventListener.onGameScoreEvent(this.scoregreen);
+        }
+    }
+
+    public void incrementScoreViolet(int scoreToAdd) {
+        this.scoreviolet += scoreToAdd;
+        if(this.onGameEventListener != null) {
+            this.onGameEventListener.onGameScoreEvent(this.scoreviolet);
+        }
+    }
+
+    public void incrementScoreYellow(int scoreToAdd) {
+        this.scoreyellow += scoreToAdd;
+        if(this.onGameEventListener != null) {
+            this.onGameEventListener.onGameScoreEvent(this.scoreyellow);
+        }
+    }
+
+    public void incrementScoreWhite(int scoreToAdd) {
+        this.scorewhite += scoreToAdd;
+        if(this.onGameEventListener != null) {
+            this.onGameEventListener.onGameScoreEvent(this.scorewhite);
+        }
+    }
+
+    public int getRedScore() {
+        return this.scorered;
+    }
+    public int getBlueScore() {
+        return this.scoreblue;
+    }
+    public int getGreenScore() {
+        return this.scoregreen;
+    }
+    public int getVioletScore() {
+        return this.scorepurple;
+    }
+    public int getYellowScore() {
+        return this.scoreyellow;
+    }
+    public int getWhiteScore() {
+        return this.scorewhite;
+    }*/
+
     // Set number of players
     public void setNumPlayers(int numPlayers) {
         this.numPlayers = numPlayers;
@@ -84,6 +149,18 @@ public class Game {
     public int getNumPlayers() {
         return this.numPlayers;
     }
+
+    //Update players
+    public void setPlayers(ArrayList Players) {this.players = Players;}
+
+    //Get players
+    public ArrayList getPlayers() {return this.players;}
+
+    //Set if timer
+    public void setIfTiming(boolean Timing) {this.timing = Timing;}
+
+    //Get if timer
+    public boolean getIfTiming() {return this.timing;}
 
     public void addEvent(byte[] message) {
         switch(this.currentState) {

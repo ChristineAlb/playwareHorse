@@ -4,15 +4,12 @@ import android.os.Handler;
 import android.util.Log;
 
 import com.livelife.motolibrary.AntData;
-//import com.example.christine.horse.AntData;
-import com.livelife.motolibrary.Game;
 import com.livelife.motolibrary.MotoConnection;
 import java.util.ArrayList;
 import java.lang.Object;
 import java.lang.Thread;
 
-public class Horse extends com.example.christine.horse.Game {
-
+public class HorseHighScore extends com.example.christine.horse.Game {
     MotoConnection connection = MotoConnection.getInstance();
 
     // This is the horse game class
@@ -85,38 +82,6 @@ public class Horse extends com.example.christine.horse.Game {
         connection.setAllTilesColor(players.get(0));
     }
 
-    //Creates animation when player is knocked out
-    public void knockout() {
-        connection.setAllTilesColor(players.get(0));
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                connection.setAllTilesColor(0);
-            }
-        }, 200);
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {connection.setAllTilesColor(players.get(0));
-            }
-        }, 400);
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                connection.setAllTilesColor(0);
-            }
-        }, 600);
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {connection.setAllTilesColor(players.get(0));
-            }
-        }, 800);
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {nextRound(true);
-            }
-        }, 1000);
-    }
-
     Handler handler = new Handler();
     private Runnable createRunnable(final int tile){
         Runnable lightDelay = new Runnable() {
@@ -128,4 +93,3 @@ public class Horse extends com.example.christine.horse.Game {
         return lightDelay;
     }
 }
-
