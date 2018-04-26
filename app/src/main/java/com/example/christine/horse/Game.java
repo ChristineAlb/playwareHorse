@@ -84,6 +84,7 @@ public class Game {
         return this.score[player];
     }
 
+
     public int getWinner() {
         int t = 0;
         for (int i=0; i<this.numPlayers;i ++){
