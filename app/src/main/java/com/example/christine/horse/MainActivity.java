@@ -20,6 +20,7 @@ import com.livelife.motolibrary.MotoGame;
 import com.livelife.motolibrary.OnAntEventListener;
 
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity implements OnAntEventListener{
 
@@ -143,7 +144,26 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
         testFirmwareButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //setSingleLed(1, 1);
+                AntData data = new AntData((byte)(39));
+                data.setSingleLed(1, 1);
+                //TimeUnit.SECONDS.sleep(1);
+                data.setSingleLed(1, 2);
+                //TimeUnit.SECONDS.sleep(1);
+                data.setSingleLed(1, 3);
+                //TimeUnit.SECONDS.sleep(1);
+                data.setSingleLed(1, 4);
+                //TimeUnit.SECONDS.sleep(1);
+                data.setSingleLed(2, 3);
+                //TimeUnit.SECONDS.sleep(1);
+                data.setSingleLed(3, 4);
+                //TimeUnit.SECONDS.sleep(1);
+                data.setSingleLed(4, 5);
+                //TimeUnit.SECONDS.sleep(1);
+                data.setSingleLed(5, 6);
+                //TimeUnit.SECONDS.sleep(1);
+                data.setSingleLed(6, 7);
+                //TimeUnit.SECONDS.sleep(1);
+                data.setSingleLed(7, 8);
             }
         });
 
