@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
             @Override
             public void onClick(View view) {
                 //setSingleLed(click, click, 1);
-                setfadeBreathing(click, 10, 1);
+                setFadeBreathing(click, 10, 1);
                 click++;
             }
         });
@@ -321,12 +321,12 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
         connection.update(data);
     }
 
-    public void setfadeBreathing(int color, int frequency, int tileID) {
+    public void setFadeBreathing(int color, int frequency, int tileID) {
         AntData data = new AntData((byte) tileID);
         byte col = (byte) color;
         byte freq = (byte) frequency;
         byte tile = (byte) tileID;
-        byte[] col_freq = {tile, 42, col, freq, 0, 0, 0, 0};
+        byte[] col_freq = {tile, 42, col, freq, 0, 0, 0, (byte)MotoConnection.getInstance().getDeviceId()};
         data.setBroadcastData(col_freq);
         connection.update(data);
     }
