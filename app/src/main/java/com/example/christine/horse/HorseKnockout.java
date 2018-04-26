@@ -73,18 +73,20 @@ public class HorseKnockout extends com.example.christine.horse.Game {
         sequence.clear();
         connection.setAllTilesToInit();
         handler.removeCallbacksAndMessages(null);
+        Log.v("","GAME ENDED");
     }
 
     public void nextRound(boolean knockout) {
         handler.removeCallbacksAndMessages(null);
+        step = 1;
+        int t = players.remove(0);
+        if (!knockout) {players.add(t); round++;}
         if (players.size()==1){
             // WE HAVE A WINNER!!!
             // run win animation
             // End game
+            winAnimation(players.get(0));
         }
-        step = 1;
-        int t = players.remove(0);
-        if (!knockout) {players.add(t); round++;}
         connection.setAllTilesColor(players.get(0));
     }
 
@@ -129,6 +131,85 @@ public class HorseKnockout extends com.example.christine.horse.Game {
             public void run() {nextRound(true);
             }
         }, 1500);
+    }
+
+    public void winAnimation(final int winner) {
+        connection.setAllTilesColor(players.get(0));
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                connection.setAllTilesColor(0);
+            }
+        }, 100);
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {connection.setAllTilesColor(winner);
+            }
+        }, 200);
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                connection.setAllTilesColor(0);
+            }
+        }, 300);
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {connection.setAllTilesColor(winner);
+            }
+        }, 400);
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                connection.setAllTilesColor(0);
+            }
+        }, 500);
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {connection.setAllTilesColor(winner);
+            }
+        }, 600);
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                connection.setAllTilesColor(0);
+            }
+        }, 1100);
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {connection.setAllTilesColor(winner);
+            }
+        }, 1600);
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                connection.setAllTilesColor(0);
+            }
+        }, 2100);
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {connection.setAllTilesColor(winner);
+            }
+        }, 2600);
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                connection.setAllTilesColor(0);
+            }
+        }, 3100);
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {connection.setAllTilesColor(winner);
+            }
+        }, 3600);
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {endGame();
+            }
+        }, 5000);
+    }
+
+    private void endGame(){
+        this.stopGame();
     }
 
     Handler handler = new Handler();
