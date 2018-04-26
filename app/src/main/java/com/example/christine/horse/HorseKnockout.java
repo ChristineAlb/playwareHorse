@@ -6,8 +6,6 @@ import android.util.Log;
 import com.livelife.motolibrary.AntData;
 import com.livelife.motolibrary.MotoConnection;
 import java.util.ArrayList;
-import java.lang.Object;
-import java.lang.Thread;
 
 public class HorseKnockout extends com.example.christine.horse.Game {
     MotoConnection connection = MotoConnection.getInstance();
@@ -15,9 +13,9 @@ public class HorseKnockout extends com.example.christine.horse.Game {
     // This is the horse game class
     ArrayList<Integer> sequence = new ArrayList<>();
     ArrayList<Integer> players = new ArrayList<>();
-    int numPlayers;
-    int round;
-    int step;
+    private int numPlayers;
+    private int round;
+    private int step;
     //final int base = 4;
 
     // Hello there!
@@ -47,7 +45,10 @@ public class HorseKnockout extends com.example.christine.horse.Game {
             if (step < round) { // Compare to sequence
                 if (tile == sequence.get(step-1)){ // Correct move
                     connection.setTileColor(players.get(0),tile);
-                    handler.postDelayed(createRunnable(tile),700);
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {connection.setAllTilesColor(0);}
+                    },700);
                     step++;
                 } else { // Wrong move
                     knockout();
@@ -56,7 +57,10 @@ public class HorseKnockout extends com.example.christine.horse.Game {
                 sequence.add(tile);
                 step++;
                 connection.setTileColor(players.get(0),tile);
-                handler.postDelayed(createRunnable(tile),700);
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {connection.setAllTilesColor(0);}
+                },700);
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -76,7 +80,7 @@ public class HorseKnockout extends com.example.christine.horse.Game {
         Log.v("","GAME ENDED");
     }
 
-    public void nextRound(boolean knockout) {
+    private void nextRound(boolean knockout) {
         handler.removeCallbacksAndMessages(null);
         step = 1;
         int t = players.remove(0);
@@ -91,7 +95,7 @@ public class HorseKnockout extends com.example.christine.horse.Game {
     }
 
     //Creates animation when player is knocked out
-    public void knockout() {
+    private void knockout() {
         connection.setAllTilesColor(players.get(0));
         handler.postDelayed(new Runnable() {
             @Override
@@ -133,7 +137,7 @@ public class HorseKnockout extends com.example.christine.horse.Game {
         }, 1500);
     }
 
-    public void winAnimation(final int winner) {
+    private void winAnimation(final int winner) {
         connection.setAllTilesColor(players.get(0));
         handler.postDelayed(new Runnable() {
             @Override
@@ -213,13 +217,4 @@ public class HorseKnockout extends com.example.christine.horse.Game {
     }
 
     Handler handler = new Handler();
-    private Runnable createRunnable(final int tile){
-        Runnable lightDelay = new Runnable() {
-            @Override
-            public void run() {
-                connection.setTileColor(0,tile);
-            }
-        };
-        return lightDelay;
-    }
 }

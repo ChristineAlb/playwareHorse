@@ -1,14 +1,11 @@
 package com.example.christine.horse;
 
 import android.os.Handler;
-import android.os.SystemClock;
 import android.util.Log;
 
 import com.livelife.motolibrary.AntData;
 import com.livelife.motolibrary.MotoConnection;
 import java.util.ArrayList;
-import java.lang.Object;
-import java.lang.Thread;
 
 public class HorseHighScore extends com.example.christine.horse.Game {
     MotoConnection connection = MotoConnection.getInstance();
@@ -16,10 +13,10 @@ public class HorseHighScore extends com.example.christine.horse.Game {
     // This is the horse game class
     ArrayList<Integer> sequence = new ArrayList<>();
     ArrayList<Integer> players = new ArrayList<>();
-    int numPlayers;
-    int round;
-    int maxRound = 10;
-    int step;
+    private int numPlayers;
+    private int round;
+    private int maxRound = 10;
+    private int step;
     //final int base = 4;
 
     @Override
@@ -47,7 +44,10 @@ public class HorseHighScore extends com.example.christine.horse.Game {
             if (step < round) { // Compare to sequence
                 if (tile == sequence.get(step-1)){ //Correct
                     connection.setTileColor(players.get(0),tile);
-                    handler.postDelayed(createRunnable(tile),700);
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {connection.setAllTilesColor(0);}
+                    },700);
                     step++;
                 } else {
                     wrongMove(tile);
@@ -55,7 +55,10 @@ public class HorseHighScore extends com.example.christine.horse.Game {
             } else if (step == round){ // Add to sequence
                 sequence.add(tile);
                 connection.setTileColor(players.get(0),tile);
-                handler.postDelayed(createRunnable(tile),700);
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {connection.setAllTilesColor(0);}
+                },700);
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -75,7 +78,7 @@ public class HorseHighScore extends com.example.christine.horse.Game {
         Log.v("","GAME ENDED");
     }
 
-    public void wrongMove(final int tile) {
+    private void wrongMove(final int tile) {
         connection.setTileColor(players.get(0),tile);
         handler.postDelayed(new Runnable() {
             @Override
@@ -117,7 +120,7 @@ public class HorseHighScore extends com.example.christine.horse.Game {
         }, 1500);
     }
 
-    public void nextRound(boolean failedStep) {
+    private void nextRound(boolean failedStep) {
         handler.removeCallbacksAndMessages(null);
         this.incrementScore(step, players.get(0));
         step = 1;
@@ -130,7 +133,7 @@ public class HorseHighScore extends com.example.christine.horse.Game {
         connection.setAllTilesColor(players.get(0));
     }
 
-    public void winAnimation(final int winner) {
+    private void winAnimation(final int winner) {
         connection.setAllTilesColor(players.get(0));
         handler.postDelayed(new Runnable() {
             @Override
@@ -210,13 +213,4 @@ public class HorseHighScore extends com.example.christine.horse.Game {
     }
 
     Handler handler = new Handler();
-    private Runnable createRunnable(final int tile){
-        Runnable lightDelay = new Runnable() {
-            @Override
-            public void run() {
-                connection.setTileColor(0,tile);
-            }
-        };
-        return lightDelay;
-    }
 }
