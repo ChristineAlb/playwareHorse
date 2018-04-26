@@ -46,6 +46,8 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
     boolean playing = false;
     int gameMode;
 
+    int click = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -149,19 +151,11 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
             @Override
             public void onClick(View view) {
                 AntData data = new AntData((byte) 1);
-                data.setSingleLed(1, 1);
-                connection.update(data);
-                data.setSingleLed(2, 2);
-                connection.update(data);
-                data.setSingleLed(3, 3);
-                connection.update(data);
-                data.setSingleLed(0, 4);
-                connection.update(data);
-                data.setSingleLed(0, 5);
-                connection.update(data);
-                data.setSingleLed(0, 6);
-                connection.update(data);
-                data.setSingleLed(0, 7);
+                data.setSingleLed(click, click);
+                click++;
+                if (click > 7) {
+                    click = 0;
+                }
                 connection.update(data);
             }
         });
