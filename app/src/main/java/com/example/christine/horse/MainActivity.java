@@ -150,13 +150,9 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
         testFirmwareButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AntData data = new AntData((byte) 1);
-                data.setSingleLed(click, click);
+                //setSingleLed(click, click, 1);
+                setfadeBreathing(click, 10, 1);
                 click++;
-                if (click > 7) {
-                    click = 0;
-                }
-                connection.update(data);
             }
         });
 
@@ -319,4 +315,16 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
 
     }
 
+    public void setSingleLed(int color, int tileID, int ledID) {
+        AntData data = new AntData((byte) tileID);
+        data.setSingleLed(color, ledID);
+        connection.update(data);
+    }
+
+    public void setfadeBreathing(int color, int frequency, int tileID) {
+        AntData data = new AntData((byte) tileID);
+        byte[] col_freq = {color, frequency}
+        data.setBroadcastData(col_freq);
+        connection.update(data);
+    }
 }
