@@ -148,8 +148,9 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
         testFirmwareButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                connection.setAllTilesColor(2);
                 AntData data = new AntData((byte) 39);
+                data.setColor(3, 4);
+                data.setColor(4);
                 data.setSingleLed(1, 1);
             }
         });
