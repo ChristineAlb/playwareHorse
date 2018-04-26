@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
             @Override
             public void onClick(View view) {
                 //setSingleLed(click, click, 1);
-                setfadeBreathing(click, 10, 1);
+                setFadeBreathing(click, 10, 1);
                 click++;
             }
         });
@@ -174,16 +174,16 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
                 gameMode = gameModeSpinner.getSelectedItemPosition();
                 if(!playing) {
                     switch (gameMode) {
-                        case 0: knockoutGame.setNumPlayers(numPlayersSpinner.getSelectedItemPosition());
+                        case 0: knockoutGame.setNumPlayers(numPlayersSpinner.getSelectedItemPosition()+1);
                                 knockoutGame.setIfTiming(false);
                                 knockoutGame.startGame();
-                        case 1: knockoutGame.setNumPlayers(numPlayersSpinner.getSelectedItemPosition());
+                        case 1: knockoutGame.setNumPlayers(numPlayersSpinner.getSelectedItemPosition()+1);
                                 knockoutGame.setIfTiming(true);
                                 knockoutGame.startGame();
-                        case 2: highscoreGame.setNumPlayers(numPlayersSpinner.getSelectedItemPosition());
+                        case 2: highscoreGame.setNumPlayers(numPlayersSpinner.getSelectedItemPosition()+1);
                                 highscoreGame.setIfTiming(false);
                                 highscoreGame.startGame();
-                        case 3: highscoreGame.setNumPlayers(numPlayersSpinner.getSelectedItemPosition());
+                        case 3: highscoreGame.setNumPlayers(numPlayersSpinner.getSelectedItemPosition()+1);
                                 highscoreGame.setIfTiming(true);
                                 highscoreGame.startGame();
                     }
@@ -234,6 +234,22 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
         gameModeSpinner = (Spinner) findViewById(R.id.gameModeSpinner);
         ArrayAdapter<String> adapter3 = new ArrayAdapter<String>(this,R.layout.spinner_item,getResources().getStringArray(R.array.gamemode));
         gameModeSpinner.setAdapter(adapter3);
+
+        numPlayersSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (i!=0) {
+                    startGameButton.setEnabled(true);
+                } else {
+                    startGameButton.setEnabled(false);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         //
     }
 
@@ -321,12 +337,12 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
         connection.update(data);
     }
 
-    public void setfadeBreathing(int color, int frequency, int tileID) {
+    public void setFadeBreathing(int color, int frequency, int tileID) {
         AntData data = new AntData((byte) tileID);
         byte col = (byte) color;
         byte freq = (byte) frequency;
         byte tile = (byte) tileID;
-        byte[] col_freq = {tile, 42, col, freq, 0, 0, 0, 0};
+        byte[] col_freq = {tile, 42, col, freq, 0, 0, 0, (byte)MotoConnection.getInstance().getDeviceId()};
         data.setBroadcastData(col_freq);
         connection.update(data);
     }
