@@ -36,7 +36,7 @@ public class HorseKnockout extends com.example.christine.horse.Game {
     private ArrayList<TilePress> seqToCompare = new ArrayList<>();
     ArrayList<Integer> players = new ArrayList<>();
     private int numPlayers, seqSize, step; //Class control variables
-    private boolean timing;
+    private boolean timing; //Another control variables
     private long delta; //Timing variable in ms
 
 
@@ -45,19 +45,22 @@ public class HorseKnockout extends com.example.christine.horse.Game {
             this.timing = true;
             this.delta = delta;
         } else {
-            timing = false;
+            this.timing = false;
         }
     }
     public HorseKnockout(boolean timing) {
         if (timing == true) {
             this.timing = true;
-            this.delta = 300; //Default delta
+            this.delta = 300; //Default delta in ms
         } else {
             this.timing = false;
         }
     }
 
     public HorseKnockout(){this(false);}
+
+    public void setTiming(boolean timing){this.timing = timing;}
+    public void setDelta(int delta) {this.delta = delta;}
 
     @Override
     public void onGameStart() {
@@ -137,6 +140,10 @@ public class HorseKnockout extends com.example.christine.horse.Game {
                     @Override
                     public void run() {connection.setAllTilesColor(0);}
                 },700);
+
+
+
+                //Case to switch player. Need an if statement
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
