@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
     Boolean updating = false;
 
     HorseKnockout knockoutGame = new HorseKnockout();
-    HorseHighScore highscoreGame = new HorseHighScore();
+    HighScore highscoreGame = new HighScore();
     Button startGameButton;
     boolean playing = false;
     int gameMode;
@@ -206,7 +206,7 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
             }
         });
 
-        knockoutGame.setOnGameEventListener(new Game.OnGameEventListener() {
+        highscoreGame.setOnGameEventListener(new Game.OnGameEventListener() {
             @Override
             public void onGameTimerEvent(int var1) {
             }
