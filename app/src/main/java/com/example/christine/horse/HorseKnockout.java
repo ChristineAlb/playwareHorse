@@ -10,27 +10,25 @@ import java.util.ArrayList;
 public class HorseKnockout extends com.example.christine.horse.Game {
     MotoConnection connection = MotoConnection.getInstance();
 
-    // This is the horse game class
+    //This is the Horse Knockout Game Class
     ArrayList<Integer> sequence = new ArrayList<>();
     ArrayList<Integer> players = new ArrayList<>();
-    private int numPlayers;
-    private int round;
-    private int step;
+    private int numPlayers, seqSize, step;
     //final int base = 4;
-
-    // Hello there!
 
     @Override
     public void onGameStart() {
         super.onGameStart();
         numPlayers = this.getNumPlayers();
+
+        //Fill player array
         for (int i=1; i<=numPlayers; i++) {
             players.add(i);
         }
-        round = 1;
-        step = 1;
-        connection.setAllTilesColor(players.get(0));
-        Log.v("","Game started: Number of Players:" + numPlayers);
+
+        seqSize = 0; step = 0;
+        connection.setAllTilesColor(players.get(0)); //Set color to be color idx player 1
+        Log.v("","Game started: Number of Players:" + numPlayers + "Player 1 begin.");
     }
 
     @Override
