@@ -11,10 +11,50 @@ public class HorseKnockout extends com.example.christine.horse.Game {
     MotoConnection connection = MotoConnection.getInstance();
 
     //This is the Horse Knockout Game Class
+
+    private class TilePress {
+        private int tileId;
+        private long time; //In ms
+
+        //TilePress constructor
+        TilePress(int tId, long t){
+            this.tileId = tId;
+            this.time = t;
+        }
+
+        //Data access
+        public void setTileId(int tId){ this.tileId = tId;}
+        public int getTileId() {return this.tileId;}
+        public void setTime(long t){ this.time = t;}
+        public long getTime() {return this.time;}
+        public String convertToString(){return "<TileId: " + this.tileId + ", Time: " + this.time + ">";}
+    }
+
     ArrayList<Integer> sequence = new ArrayList<>();
     ArrayList<Integer> players = new ArrayList<>();
-    private int numPlayers, seqSize, step;
+    private int numPlayers, seqSize, step; //Class control variables
+    private boolean timing;
+    private long delta; //Timing variable in ms
     //final int base = 4;
+
+    public HorseKnockout(boolean timing, long delta){
+        if(timing == true){
+            this.timing = true;
+            this.delta = delta;
+        } else {
+            timing = false;
+        }
+    }
+    public HorseKnockout(boolean timing) {
+        if (timing == true) {
+            this.timing = true;
+            this.delta = 300; //Default delta
+        } else {
+            this.timing = false;
+        }
+    }
+
+    public HorseKnockout(){this(false);}
 
     @Override
     public void onGameStart() {
@@ -37,11 +77,13 @@ public class HorseKnockout extends com.example.christine.horse.Game {
         int cmd = AntData.getCommand(message);
         int tile = AntData.getId(message);
 
-        if (cmd == AntData.EVENT_PRESS && step <= round) {
-            if (step==1)connection.setAllTilesColor(0);
+        if (cmd == AntData.EVENT_PRESS && step <= seqSize) {
+            if (step==0)connection.setAllTilesColor(0);
 
-            if (step < round) { // Compare to sequence
-                if (tile == sequence.get(step-1)){ // Correct move
+
+            //Compare Case
+            if (step < seqSize) { // Compare to sequence
+                if (tile == sequence.get(step)){ // Correct move
                     connection.setTileColor(players.get(0),tile);
                     handler.postDelayed(new Runnable() {
                         @Override
@@ -51,7 +93,7 @@ public class HorseKnockout extends com.example.christine.horse.Game {
                 } else { // Wrong move
                     knockout();
                 }
-            } else if (step == round){ // Add to sequence
+            } else if (step == seqSize){ // Add to sequence
                 sequence.add(tile);
                 step++;
                 connection.setTileColor(players.get(0),tile);
@@ -80,9 +122,9 @@ public class HorseKnockout extends com.example.christine.horse.Game {
 
     private void nextRound(boolean knockout) {
         handler.removeCallbacksAndMessages(null);
-        step = 1;
+        step = 0;
         int t = players.remove(0);
-        if (!knockout) {players.add(t); round++;}
+        if (!knockout) {players.add(t); seqSize++;}
         if (players.size()==1){
             // WE HAVE A WINNER!!!
             // run win animation
