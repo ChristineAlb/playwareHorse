@@ -153,6 +153,7 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
             public void onClick(View view) {
                 //setSingleLed(click, click, 1);
                 setFadeBreathing(click, 10, 1);
+                //setFadeOut(click, 20, 1);
                 click++;
             }
         });
@@ -341,10 +342,22 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
     public void setFadeBreathing(int color, int frequency, int tileID) {
         AntData data = new AntData((byte) tileID);
         byte col = (byte) color;
-        byte freq = (byte) frequency;
+        byte freq = (byte) frequency; // A frequency of 10 ms is nice
         byte tile = (byte) tileID;
-        byte[] col_freq = {tile, 42, col, freq, 0, 0, 0, (byte)MotoConnection.getInstance().getDeviceId()};
-        data.setBroadcastData(col_freq);
+        byte connect = (byte)MotoConnection.getInstance().getDeviceId();
+        byte[] communication = {tile, 42, col, freq, 0, 0, 0, connect};
+        data.setBroadcastData(communication);
+        connection.update(data);
+    }
+
+    public void setFadeOut(int color, int frequency, int tileID) {
+        AntData data = new AntData((byte) tileID);
+        byte col = (byte) color;
+        byte freq = (byte) frequency; // A frequency of 20 ms is nice
+        byte tile = (byte) tileID;
+        byte connect = (byte)MotoConnection.getInstance().getDeviceId();
+        byte[] communication = {tile, 43, col, freq, 0, 0, 0, connect};
+        data.setBroadcastData(communication);
         connection.update(data);
     }
 }
