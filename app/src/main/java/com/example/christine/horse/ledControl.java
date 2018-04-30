@@ -9,7 +9,7 @@ import com.livelife.motolibrary.MotoConnection;
 
 public class ledControl {
 
-    public static void setSingleLed(MotoConnection connection, int color, int tileID, int ledID) {
+    public static void setSingleLed(MotoConnection connection, int color, int ledID, int tileID) {
         AntData data = new AntData((byte) tileID);
         data.setSingleLed(color, ledID);
         connection.update(data);
