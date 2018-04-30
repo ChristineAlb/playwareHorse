@@ -43,7 +43,6 @@ public class Timing extends com.example.christine.horse.Game {
      */
     private ArrayList<TilePress> sequence = new ArrayList<>(); //This is the stepping sequence
     private ArrayList<TilePress> seqToCompare = new ArrayList<>();
-    private ArrayList<Integer> players = new ArrayList<>(); //Player order
     private int delta; //Timing delta in ms
     private int stepsToAdd;
     private int numPlayers, currentPlayer, seqSize, step; //Game control variables
