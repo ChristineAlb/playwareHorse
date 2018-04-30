@@ -6,9 +6,11 @@ import android.util.Log;
 import com.livelife.motolibrary.AntData;
 import com.livelife.motolibrary.MotoConnection;
 import java.util.ArrayList;
+import android.os.SystemClock;
 
 public class HorseKnockout extends com.example.christine.horse.Game {
     MotoConnection connection = MotoConnection.getInstance();
+    Handler handler = new Handler();
 
     //This is the Horse Knockout Game Class
 
@@ -17,7 +19,7 @@ public class HorseKnockout extends com.example.christine.horse.Game {
         private long time; //In ms
 
         //TilePress constructor
-        TilePress(int tId, long t){
+        private TilePress(int tId, long t){
             this.tileId = tId;
             this.time = t;
         }
@@ -30,12 +32,13 @@ public class HorseKnockout extends com.example.christine.horse.Game {
         public String convertToString(){return "<TileId: " + this.tileId + ", Time: " + this.time + ">";}
     }
 
-    ArrayList<Integer> sequence = new ArrayList<>();
+    private ArrayList<TilePress> sequence = new ArrayList<>(); //This is the stepping sequence
+    private ArrayList<TilePress> seqToCompare = new ArrayList<>();
     ArrayList<Integer> players = new ArrayList<>();
     private int numPlayers, seqSize, step; //Class control variables
     private boolean timing;
     private long delta; //Timing variable in ms
-    //final int base = 4;
+
 
     public HorseKnockout(boolean timing, long delta){
         if(timing == true){
@@ -75,28 +78,59 @@ public class HorseKnockout extends com.example.christine.horse.Game {
     public void onGameUpdate(byte[] message) {
         super.onGameUpdate(message);
         int cmd = AntData.getCommand(message);
-        int tile = AntData.getId(message);
+        int tId = AntData.getId(message);
 
-        if (cmd == AntData.EVENT_PRESS && step <= seqSize) {
-            if (step==0)connection.setAllTilesColor(0);
-
+        if (cmd == AntData.EVENT_PRESS ) {
+            if (step==0)connection.setAllTilesColor(0); //Turn off all tiles
 
             //Compare Case
-            if (step < seqSize) { // Compare to sequence
-                if (tile == sequence.get(step)){ // Correct move
-                    connection.setTileColor(players.get(0),tile);
+            if (step < seqSize) {
+                if (tId == sequence.get(step).getTileId()) { //Correct tile id
+                    connection.setTileColor(players.get(0), tId);
                     handler.postDelayed(new Runnable() {
                         @Override
-                        public void run() {connection.setAllTilesColor(0);}
-                    },700);
+                        public void run() {
+                            connection.setAllTilesColor(0);
+                        }
+                    }, 700);
+
+                    if (timing == true) {
+                        long curTime = SystemClock.uptimeMillis();
+
+                        if (step == 0) {
+                            TilePress myTile = TilePress(tId, curTime);
+                            seqToCompare.add(myTile);
+                        } else {
+                            long timeDelta = timeInterval(seqToCompare.get(step - 1).getTime(), curTime);
+                            if (java.lang.Math.abs(timeDelta - sequence.get(step).getTime()) <= delta) {
+                                //Correct timing
+                                TilePress myTile = TilePress(tId, curTime);
+                                seqToCompare.add(myTile);
+                            } else {
+                                //Timing does not match
+                                //Knockout
+                            }
+                        }
+                    }
                     step++;
-                } else { // Wrong move
-                    knockout();
+                } else { //If tileid does not match
+                    //Knockout();
+
                 }
-            } else if (step == seqSize){ // Add to sequence
-                sequence.add(tile);
+            } else { // Add to sequence
+                long curTime = SystemClock.uptimeMillis();
+
+                if(step == 0){
+                    TilePress myTile = new TilePress(tId, curTime);
+                    sequence.add(myTile);
+                } else {
+                    long tInt = timeInterval(seqToCompare.get(step-1).getTime(), curTime);
+                    TilePress myTile = new TilePress(tId, curTime);
+                    sequence.add(myTile);
+                }
                 step++;
-                connection.setTileColor(players.get(0),tile);
+
+                connection.setTileColor(players.get(0),tId);
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {connection.setAllTilesColor(0);}
@@ -115,6 +149,7 @@ public class HorseKnockout extends com.example.christine.horse.Game {
     public void onGameEnd() {
         super.onGameEnd();
         sequence.clear();
+        seqToCompare.clear();
         connection.setAllTilesToInit();
         handler.removeCallbacksAndMessages(null);
         Log.v("","GAME ENDED");
@@ -256,5 +291,5 @@ public class HorseKnockout extends com.example.christine.horse.Game {
         this.stopGame();
     }
 
-    Handler handler = new Handler();
+    private long timeInterval(long t1, long t2){return t2-t1;}
 }
