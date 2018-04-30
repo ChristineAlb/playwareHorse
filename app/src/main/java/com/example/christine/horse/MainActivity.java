@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
     Spinner spinner,numPlayersSpinner, gameModeSpinner;
     Button connectButton,pairingButton,updFirmwareButton,testFirmwareButton;
     LinearLayout actionsLayout;
-    TextView tilesConnectedLabel;
+    TextView tilesConnectedLabel, roundText;
 
     TextView teamRedScore,teamBlueScore,teamGreenScore,teamVioletScore,teamYellowScore,teamWhiteScore;
 
@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
             @Override
             public void onClick(View view) {
                 //setSingleLed(click, click, 1);
-                setFadeBreathing(click, 10, 1);
+                ledControl.setFadeBreathing(connection,click, 10, 1);
                 //setFadeOut(click, 20, 1);
                 click++;
             }
@@ -166,6 +166,7 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
         teamYellowScore = (TextView) findViewById(R.id.team_yellow_score);
         teamWhiteScore = (TextView) findViewById(R.id.team_white_score);
 
+        roundText = (TextView) findViewById(R.id.roundText);
 
         // Game stuff goes here
         startGameButton = (Button) findViewById(R.id.playGame);
@@ -212,7 +213,13 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
 
         highscoreGame.setOnGameEventListener(new Game.OnGameEventListener() {
             @Override
-            public void onGameTimerEvent(int var1) {
+            public void onGameRoundEvent(int round) {
+                MainActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        roundText.setText("Round: "+highscoreGame.getRounds());
+                    }
+                });
             }
 
             @Override
@@ -240,7 +247,7 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
 
         knockoutGame.setOnGameEventListener(new Game.OnGameEventListener() {
             @Override
-            public void onGameTimerEvent(int var1) {
+            public void onGameRoundEvent(int var1) {
             }
             @Override
             public void onGameScoreEvent(int var1, int var2) {
@@ -378,33 +385,32 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
         teamWhiteScore.setText("0");
     }
 
-    public void setSingleLed(int color, int tileID, int ledID) {
-        AntData data = new AntData((byte) tileID);
-        data.setSingleLed(color, ledID);
-        connection.update(data);
-    }
-
-    public void setFadeBreathing(int color, int frequency, int tileID) {
-        AntData data = new AntData((byte) tileID);
-        byte col = (byte) color;
-        byte freq = (byte) frequency; // A frequency of 10 ms is nice
-        byte tile = (byte) tileID;
-        byte connect = (byte)MotoConnection.getInstance().getDeviceId();
-        byte[] communication = {tile, 42, col, freq, 0, 0, 0, connect};
-        data.setBroadcastData(communication);
-        connection.update(data);
-    }
-
-    public void setFadeOut(int color, int frequency, int tileID) {
-        AntData data = new AntData((byte) tileID);
-        byte col = (byte) color;
-        byte freq = (byte) frequency; // A frequency of 20 ms is nice
-        byte tile = (byte) tileID;
-        byte connect = (byte)MotoConnection.getInstance().getDeviceId();
-        byte[] communication = {tile, 43, col, freq, 0, 0, 0, connect};
-        data.setBroadcastData(communication);
-        connection.update(data);
-    }
-
+//    public void setSingleLed(int color, int tileID, int ledID) {
+//        AntData data = new AntData((byte) tileID);
+//        data.setSingleLed(color, ledID);
+//        connection.update(data);
+//    }
+//
+//    public void setFadeBreathing(int color, int frequency, int tileID) {
+//        AntData data = new AntData((byte) tileID);
+//        byte col = (byte) color;
+//        byte freq = (byte) frequency; // A frequency of 10 ms is nice
+//        byte tile = (byte) tileID;
+//        byte connect = (byte)MotoConnection.getInstance().getDeviceId();
+//        byte[] communication = {tile, 42, col, freq, 0, 0, 0, connect};
+//        data.setBroadcastData(communication);
+//        connection.update(data);
+//    }
+//
+//    public void setFadeOut(int color, int frequency, int tileID) {
+//        AntData data = new AntData((byte) tileID);
+//        byte col = (byte) color;
+//        byte freq = (byte) frequency; // A frequency of 20 ms is nice
+//        byte tile = (byte) tileID;
+//        byte connect = (byte)MotoConnection.getInstance().getDeviceId();
+//        byte[] communication = {tile, 43, col, freq, 0, 0, 0, connect};
+//        data.setBroadcastData(communication);
+//        connection.update(data);
+//    }
 
 }

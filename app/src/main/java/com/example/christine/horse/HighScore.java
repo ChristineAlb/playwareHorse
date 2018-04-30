@@ -77,6 +77,7 @@ public class HighScore extends com.example.christine.horse.Game {
     public void setTimingDelta(int delta){this.delta = delta;}
     public void setStepsToAdd(int stepsToAdd){this.stepsToAdd = stepsToAdd;}
     public void setNumRounds(int numRounds){this.numRounds = numRounds;}
+    public int getRounds() {return this.seqSize;}
 
     /**
      * Overwritten Game methods. Necessary for Game inheritance
@@ -144,8 +145,7 @@ public class HighScore extends com.example.christine.horse.Game {
                 Log.v("", "TilePress Object added: " + myTile.convertToString());
                 step++;
             }
-            connection.setTileColor(currentPlayer, tId);
-            handler.postDelayed(tileColorRunnable(tId), colorOffDelay);
+            ledControl.setFadeOut(connection, currentPlayer,20,tId);
             if(step == seqSize+stepsToAdd){
                 handler.postDelayed(new Runnable() {
                     @Override
@@ -183,7 +183,7 @@ public class HighScore extends com.example.christine.horse.Game {
         seqToCompare.clear();
         currentPlayer++;
         if (currentPlayer>numPlayers) currentPlayer=1;
-        connection.setAllTilesColor(currentPlayer);
+        ledControl.setAllFadeBreathing(connection, currentPlayer, 20);
         score = 0;
     }
 
@@ -193,6 +193,7 @@ public class HighScore extends com.example.christine.horse.Game {
         numPlayers = this.getNumPlayers();
         isTiming = this.getIfTiming();
         step=0; seqSize=0; currentPlayer=1;
+        ledControl.setAllFadeBreathing(connection,1,10);
         connection.setAllTilesColor(1); //What if this is out of bound?
     }
 

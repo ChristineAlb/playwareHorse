@@ -38,7 +38,7 @@ public class Game {
             }
 
             if(Game.this.onGameEventListener != null) {
-                Game.this.onGameEventListener.onGameTimerEvent(Game.this.remaining / 1000);
+                //Game.this.onGameEventListener.onGameTimerEvent(Game.this.remaining / 1000);
             }
 
         }
@@ -195,7 +195,7 @@ public class Game {
     }
 
     public interface OnGameEventListener {
-        void onGameTimerEvent(int var1);
+        void onGameRoundEvent(int var1);
 
         void onGameScoreEvent(int score, int player);
 
