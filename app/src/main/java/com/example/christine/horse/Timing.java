@@ -156,7 +156,6 @@ public class Timing extends com.example.christine.horse.Game {
         Log.v("END", "Game has ended.");
     }
 
-
     /**
      * Helper Methods
      */

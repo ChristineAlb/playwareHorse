@@ -39,7 +39,7 @@ public class HorseHighScore extends com.example.christine.horse.Game {
         int tile = AntData.getId(message);
 
         if (cmd == AntData.EVENT_PRESS && step <= round) {
-            if (step==1)connection.setAllTilesColor(0);
+            if (step==1) connection.setAllTilesColor(0);
 
             if (step < round) { // Compare to sequence
                 if (tile == sequence.get(step-1)){ //Correct
@@ -122,7 +122,9 @@ public class HorseHighScore extends com.example.christine.horse.Game {
 
     private void nextRound(boolean failedStep) {
         handler.removeCallbacksAndMessages(null);
+        Log.v("","NEW ROUND, old score: " + this.getScore(players.get(0)));
         this.incrementScore(step, players.get(0));
+        Log.v("","new score: "+this.getScore(players.get(0)));
         step = 1;
         int t = players.remove(0);
         players.add(t);
