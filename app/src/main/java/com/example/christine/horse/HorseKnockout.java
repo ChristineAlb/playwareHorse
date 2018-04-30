@@ -98,24 +98,26 @@ public class HorseKnockout extends com.example.christine.horse.Game {
                         long curTime = SystemClock.uptimeMillis();
 
                         if (step == 0) {
-                            TilePress myTile = TilePress(tId, curTime);
+                            TilePress myTile = new TilePress(tId, curTime);
                             seqToCompare.add(myTile);
+                            step++;
                         } else {
                             long timeDelta = timeInterval(seqToCompare.get(step - 1).getTime(), curTime);
                             if (java.lang.Math.abs(timeDelta - sequence.get(step).getTime()) <= delta) {
                                 //Correct timing
-                                TilePress myTile = TilePress(tId, curTime);
+                                TilePress myTile = new TilePress(tId, curTime);
                                 seqToCompare.add(myTile);
+                                step++;
                             } else {
                                 //Timing does not match
                                 //Knockout
+                                knockout();
                             }
                         }
                     }
-                    step++;
-                } else { //If tileid does not match
-                    //Knockout();
 
+                } else { //If tileid does not match
+                    knockout();
                 }
             } else { // Add to sequence
                 long curTime = SystemClock.uptimeMillis();
