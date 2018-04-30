@@ -105,6 +105,7 @@ public class HighScore extends com.example.christine.horse.Game {
                         //Get the reference time. This ensures time to switch player
                         TilePress myTile = new TilePress(tId, SystemClock.uptimeMillis());
                         seqToCompare.add(myTile);
+                        connection.setAllTilesColor(0);
                     } else {
                         //Check if timing is correct
                         long curTime = SystemClock.uptimeMillis();
@@ -195,8 +196,9 @@ public class HighScore extends com.example.christine.horse.Game {
         connection.setAllTilesColor(1); //What if this is out of bound?
     }
 
-    private void endGame() {}
-
+    private void endGame() {
+        this.stopGame();
+    }
 
     private void wrongMove(final int tile) {
         connection.setTileColor(currentPlayer,tile);

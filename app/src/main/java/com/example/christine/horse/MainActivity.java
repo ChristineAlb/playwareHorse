@@ -177,15 +177,19 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
                     switch (gameMode) {
                         case 0: knockoutGame.setNumPlayers(numPlayersSpinner.getSelectedItemPosition()+1);
                                 knockoutGame.setIfTiming(false);
+                                initScore();
                                 knockoutGame.startGame();
                         case 1: knockoutGame.setNumPlayers(numPlayersSpinner.getSelectedItemPosition()+1);
                                 knockoutGame.setIfTiming(true);
+                                initScore();
                                 knockoutGame.startGame();
                         case 2: highscoreGame.setNumPlayers(numPlayersSpinner.getSelectedItemPosition()+1);
                                 highscoreGame.setIfTiming(false);
                                 highscoreGame.startGame();
+                                initScore();
                         case 3: highscoreGame.setNumPlayers(numPlayersSpinner.getSelectedItemPosition()+1);
                                 highscoreGame.setIfTiming(true);
+                                initScore();
                                 highscoreGame.startGame();
                     }
                     startGameButton.setText("STOP GAME");
@@ -227,7 +231,40 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
                     }
                 });
             }
+
+            @Override
+            public void onGameKnockoutEvent(int var1) {
+
+            }
         });
+
+        knockoutGame.setOnGameEventListener(new Game.OnGameEventListener() {
+            @Override
+            public void onGameTimerEvent(int var1) {
+            }
+            @Override
+            public void onGameScoreEvent(int var1, int var2) {
+            }
+            @Override
+            public void onGameKnockoutEvent(final int player) {
+                MainActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        switch (player) {
+                            case 1: teamRedScore.setText("X");
+                            case 2: teamBlueScore.setText("X");
+                            case 3: teamGreenScore.setText("X");
+                            case 4: teamVioletScore.setText("X");
+                            case 5: teamYellowScore.setText("X");
+                            case 6: teamWhiteScore.setText("X");
+                        }
+                    }
+                });
+            }
+        });
+
+
+
         numPlayersSpinner = (Spinner) findViewById(R.id.numPlayersSpinner);
         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, R.layout.spinner_item, getResources().getStringArray(R.array.players));
         numPlayersSpinner.setAdapter(adapter2);
@@ -332,6 +369,15 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
 
     }
 
+    public void initScore() {
+        teamRedScore.setText("0");
+        teamBlueScore.setText("0");
+        teamGreenScore.setText("0");
+        teamVioletScore.setText("0");
+        teamYellowScore.setText("0");
+        teamWhiteScore.setText("0");
+    }
+
     public void setSingleLed(int color, int tileID, int ledID) {
         AntData data = new AntData((byte) tileID);
         data.setSingleLed(color, ledID);
@@ -359,4 +405,6 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
         data.setBroadcastData(communication);
         connection.update(data);
     }
+
+
 }

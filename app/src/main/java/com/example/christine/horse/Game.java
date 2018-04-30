@@ -82,6 +82,12 @@ public class Game {
         }
     }
 
+    public void knockoutPlayer(int player){
+        if(this.onGameEventListener != null){
+            this.onGameEventListener.onGameKnockoutEvent(player);
+        }
+    }
+
     public int getScore(int player) {
         return this.score[player];
     }
@@ -192,5 +198,7 @@ public class Game {
         void onGameTimerEvent(int var1);
 
         void onGameScoreEvent(int score, int player);
+
+        void onGameKnockoutEvent(int player);
     }
 }
