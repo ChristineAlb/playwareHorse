@@ -19,6 +19,8 @@ public class HorseHighScore extends com.example.christine.horse.Game {
     private int step;
     //final int base = 4;
 
+    public int getRounds() {return round;}
+
     @Override
     public void onGameStart() {
         super.onGameStart();
@@ -52,7 +54,8 @@ public class HorseHighScore extends com.example.christine.horse.Game {
                 } else {
                     wrongMove(tile);
                 }
-            } else if (step == round){ // Add to sequence
+            } else { // Add to sequence
+                step++;
                 sequence.add(tile);
                 connection.setTileColor(players.get(0),tile);
                 handler.postDelayed(new Runnable() {
@@ -73,6 +76,7 @@ public class HorseHighScore extends com.example.christine.horse.Game {
     public void onGameEnd() {
         super.onGameEnd();
         sequence.clear();
+        players.clear();
         connection.setAllTilesToInit();
         handler.removeCallbacksAndMessages(null);
         Log.v("","GAME ENDED");
@@ -122,7 +126,9 @@ public class HorseHighScore extends com.example.christine.horse.Game {
 
     private void nextRound(boolean failedStep) {
         handler.removeCallbacksAndMessages(null);
-        this.incrementScore(step, players.get(0));
+        int k = players.get(0)-1;
+        int p = step -1;
+        this.incrementScore(p, k);
         step = 1;
         int t = players.remove(0);
         players.add(t);

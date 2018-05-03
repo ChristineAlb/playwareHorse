@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
     Boolean updating = false;
 
     HorseKnockout knockoutGame = new HorseKnockout();
-    HighScore highscoreGame = new HighScore();
+    HorseHighScore highscoreGame = new HorseHighScore();
     Button startGameButton;
     boolean playing = false;
     int gameMode;
@@ -180,28 +180,32 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
                                 knockoutGame.setIfTiming(false);
                                 initScore();
                                 knockoutGame.startGame();
+                                break;
                         case 1: knockoutGame.setNumPlayers(numPlayersSpinner.getSelectedItemPosition()+1);
                                 knockoutGame.setIfTiming(true);
                                 initScore();
                                 knockoutGame.startGame();
+                                break;
                         case 2: highscoreGame.setNumPlayers(numPlayersSpinner.getSelectedItemPosition()+1);
                                 highscoreGame.setIfTiming(false);
                                 highscoreGame.startGame();
                                 initScore();
+                                break;
                         case 3: highscoreGame.setNumPlayers(numPlayersSpinner.getSelectedItemPosition()+1);
                                 highscoreGame.setIfTiming(true);
                                 initScore();
                                 highscoreGame.startGame();
+                                break;
                     }
                     startGameButton.setText("STOP GAME");
                     numPlayersSpinner.setEnabled(false);
                     gameModeSpinner.setEnabled(false);
                 } else {
                     switch (gameMode) {
-                        case 0: knockoutGame.stopGame();
-                        case 1: knockoutGame.stopGame();
-                        case 2: highscoreGame.stopGame();
-                        case 3: highscoreGame.stopGame();
+                        case 0: knockoutGame.stopGame(); break;
+                        case 1: knockoutGame.stopGame(); break;
+                        case 2: highscoreGame.stopGame(); break;
+                        case 3: highscoreGame.stopGame(); break;
                     }
                     startGameButton.setText("START GAME");
                     numPlayersSpinner.setEnabled(true);
@@ -228,12 +232,12 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
                     @Override
                     public void run() {
                         switch (player) {
-                            case 1: teamRedScore.setText(""+score+"");
-                            case 2: teamBlueScore.setText(""+score+"");
-                            case 3: teamGreenScore.setText(""+score+"");
-                            case 4: teamVioletScore.setText(""+score+"");
-                            case 5: teamYellowScore.setText(""+score+"");
-                            case 6: teamWhiteScore.setText(""+score+"");
+                            case 1: teamRedScore.setText(""+score+""); break;
+                            case 2: teamBlueScore.setText(""+score+""); break;
+                            case 3: teamGreenScore.setText(""+score+""); break;
+                            case 4: teamVioletScore.setText(""+score+""); break;
+                            case 5: teamYellowScore.setText(""+score+""); break;
+                            case 6: teamWhiteScore.setText(""+score+""); break;
                         }
                     }
                 });
@@ -257,13 +261,14 @@ public class MainActivity extends AppCompatActivity implements OnAntEventListene
                 MainActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        switch (player) {
-                            case 1: teamRedScore.setText("X");
-                            case 2: teamBlueScore.setText("X");
-                            case 3: teamGreenScore.setText("X");
-                            case 4: teamVioletScore.setText("X");
-                            case 5: teamYellowScore.setText("X");
-                            case 6: teamWhiteScore.setText("X");
+                        int t = player+1;
+                        switch (t) {
+                            case 1: teamRedScore.setText("X"); break;
+                            case 2: teamBlueScore.setText("X"); break;
+                            case 3: teamGreenScore.setText("X"); break;
+                            case 4: teamVioletScore.setText("X"); break;
+                            case 5: teamYellowScore.setText("X"); break;
+                            case 6: teamWhiteScore.setText("X"); break;
                         }
                     }
                 });

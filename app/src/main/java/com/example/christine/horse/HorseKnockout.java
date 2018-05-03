@@ -75,6 +75,7 @@ public class HorseKnockout extends com.example.christine.horse.Game {
     public void onGameEnd() {
         super.onGameEnd();
         sequence.clear();
+        players.clear();
         connection.setAllTilesToInit();
         handler.removeCallbacksAndMessages(null);
         Log.v("","GAME ENDED");
@@ -96,6 +97,7 @@ public class HorseKnockout extends com.example.christine.horse.Game {
 
     //Creates animation when player is knocked out
     private void knockout() {
+        this.knockoutPlayer(players.get(0));
         connection.setAllTilesColor(players.get(0));
         handler.postDelayed(new Runnable() {
             @Override

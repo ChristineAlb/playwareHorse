@@ -75,7 +75,7 @@ public class Game {
     }
 
     public void incrementScore(int scoreToAdd, int player) {
-        this.score[player] += scoreToAdd;
+        this.score[player] = this.score[player] + scoreToAdd;
         Log.v("","Player: "+player+". Score: "+this.score[player]);
         if(this.onGameEventListener != null) {
             this.onGameEventListener.onGameScoreEvent(this.score[player],player);
